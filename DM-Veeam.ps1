@@ -99,3 +99,15 @@ function Get-DMVBRNotWriteableTapes {
         ($_.ProtectedBySoftware -ne $true)
     } | Sort-Object -Property @{Expression = {$_.IsFree}; Ascending = $false}, ExpirationDate,Barcode
 }
+
+### ----------
+
+# Handy ref for generating mail body text:
+
+#$lastTape = Get-DMVBRLastTapeWritten
+#Remove-Item C:\Scripts\MailBody.txt
+#Add-Content C:\Scripts\MailBody.txt "#1 - Remove the tape from the I/O slot, it should be: $($lastTape.Barcode)"
+#Add-Content C:\Scripts\MailBody.txt "#2 - Insert a new tape for the next backup"
+#Add-Content C:\Scripts\MailBody.txt "     (see the list below for help choosing which tape to insert)"
+#$writeableTapes = Get-DMVBRWriteableTapes
+#$writeableTapes | Out-File -Encoding UTF8 -Append C:\Scripts\MailBody.txt
