@@ -18,7 +18,7 @@ function Start-DMSpeedTest {
     $DownloadPath = "$path\SpeedTest.Zip"
     $ExtractToPath = "$path\SpeedTest"
     $SpeedTestEXEPath = "$path\SpeedTest\speedtest.exe"
-    $LogPath = '$path\SpeedTestLog.txt'
+    $LogPath = "$path\SpeedTestLog.txt"
 
     #Start Logging to a Text File
     $ErrorActionPreference="SilentlyContinue"
@@ -27,21 +27,14 @@ function Start-DMSpeedTest {
     Start-Transcript -path $LogPath -Append:$false
     #check for and delete existing log files
 
-    function Start-DMSpeedTestDotNet()
-    {
-        $test = & $SpeedTestEXEPath --accept-license
-        return $test
-    }
-
     #check if file exists
     if (Test-Path $SpeedTestEXEPath -PathType leaf)
     {
-        Write-Host "SpeedTest EXE Exists, starting test" -ForegroundColor Green
-        Start-DMSpeedTestDotNet
+        Write-Host "SpeedTest EXE exists"
     }
     else
     {
-        Write-Host "SpeedTest EXE Doesnt Exist, starting file download"
+        Write-Host "SpeedTest EXE does not exist, starting file download"
 
         #downloads the file from the URL
         wget $DownloadURL -outfile $DownloadPath
@@ -56,8 +49,9 @@ function Start-DMSpeedTest {
         }
 
         Unzip $DownloadPath $ExtractToPath
-        Start-DMSpeedTestDotNet
     }
+    Write-Host "Starting test" -ForegroundColor Green
+    $test = & $SpeedTestEXEPath --accept-license
 
     #stop logging
     Stop-Transcript
