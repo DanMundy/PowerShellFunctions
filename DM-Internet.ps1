@@ -2,7 +2,7 @@
 # Purpose:  Resolve full URL from short URL
 # Usage:    $resolvedUrl = Get-DMUrlFromShortUrl -url "https://dm.wtf/test"
 function Get-DMUrlFromShortUrl ($url) {
-    return (((Invoke-WebRequest -UseBasicParsing –Uri $url).baseresponse).ResponseUri).AbsoluteUri
+    return (((Invoke-WebRequest -UseBasicParsing -Uri $url).baseresponse).ResponseUri).AbsoluteUri
 }
 
 # ----------
