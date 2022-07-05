@@ -11,7 +11,6 @@ function Get-DMUrlFromShortUrl ($url) {
 # 
 # Resources:
 # SpeedTest.Net CLI: https://www.speedtest.net/apps/cli
-# Invoke-WebRequest 'https://raw.githubusercontent.com/DanMundy/PowerShellFunctions/main/DM-Internet.ps1' -OutFile .\DM-Internet.ps1
 
 function Start-DMSpeedTest {
     $path = $env:TEMP
@@ -45,4 +44,12 @@ function Start-DMSpeedTest {
     Write-Host "Starting test" -ForegroundColor Green
     $test = & $SpeedTestEXEPath --accept-license
     return $test
+}
+
+# ----------
+
+function Download-DMPSFunction ($name) {
+    $file = "$name.ps1"
+    if (Test-Path .\$file) { Remove-Item .\$file }
+    Invoke-WebRequest "https://raw.githubusercontent.com/DanMundy/PowerShellFunctions/main/$file" -OutFile .\$file
 }
