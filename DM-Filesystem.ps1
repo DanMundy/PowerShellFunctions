@@ -34,3 +34,19 @@ function Get-DMSmbSharePaths ($ServerName,$OutFile) {
     #$Shares | Export-Csv -Path $OutFile
 }
 Get-DMSmbSharePaths -ServerName "MULLINS-FILES01" -OutFile C:\C1\mullins-shares-files01.csv
+
+### ----------
+
+# Function: Get-DM-DirectoryUsage
+# Purpose: Show size of subdirectories, 1 level deep
+#          (like Linux's 'du --max-depth=1')
+# Usage: Get-DM-DirectoryUsage C:\ClusterStorage\CSV01
+#        Get-DM-DirectoryUsage C:\ClusterStorage\CSV01\Servers
+function Get-DM-DirectoryUsage ($startFolder) {
+    $colItems = Get-ChildItem $startFolder | Where-Object {$_.PSIsContainer -eq $true} | Sort-Object
+    foreach ($i in $colItems)
+    {
+        $subFolderItems = Get-ChildItem $i.FullName -recurse -force | Where-Object {$_.PSIsContainer -eq $false} | Measure-Object -property Length -sum | Select-Object Sum
+        $i.FullName + " -- " + "{0:N2}" -f ($subFolderItems.sum / 1MB) + " MB"
+    }
+}

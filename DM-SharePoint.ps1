@@ -244,19 +244,19 @@ Function New-DM-SPGroupsForDL ($SiteName, $LibraryName, $GroupOwner) {
   $AADGroupOwner = (Get-AzureADUser -Filter "UserPrincipalName eq '$GroupOwner'")
 
   # Create READ group
-  $AADGroupForDLRead = "SP-S-$SiteName-DL-LIBRARYNAME-P-READ"
+  $AADGroupForDLRead = "SP-S-$SiteName-DL-$LibraryName-P-READ"
   New-AzureADGroup -DisplayName "$AADGroupForDLRead" -MailEnabled $false -SecurityEnabled $true -MailNickName "NotSet"
   $AADGroup = (Get-AzureADGroup -Filter "Displayname eq '$AADGroupForDLRead'")
   Add-AzureADGroupOwner -ObjectId $AADGroup.ObjectId -RefObjectId $AADGroupOwner.ObjectId
   
   # Create CONTRIB group
-  $AADGroupForDLContrib = "SP-S-$SiteName-DL-LIBRARYNAME-P-CONTRIB"
+  $AADGroupForDLContrib = "SP-S-$SiteName-DL-$LibraryName-P-CONTRIB"
   New-AzureADGroup -DisplayName "$AADGroupForDLContrib" -MailEnabled $false -SecurityEnabled $true -MailNickName "NotSet"
   $AADGroup = (Get-AzureADGroup -Filter "Displayname eq '$AADGroupForDLContrib'")
   Add-AzureADGroupOwner -ObjectId $AADGroup.ObjectId -RefObjectId $AADGroupOwner.ObjectId
   
   # Create OWNER group
-  $AADGroupForDLOwner = "SP-S-$SiteName-DL-LIBRARYNAME-P-OWNER"
+  $AADGroupForDLOwner = "SP-S-$SiteName-DL-$LibraryName-P-OWNER"
   New-AzureADGroup -DisplayName "$AADGroupForDLOwner" -MailEnabled $false -SecurityEnabled $true -MailNickName "NotSet"
   $AADGroup = (Get-AzureADGroup -Filter "Displayname eq '$AADGroupForDLOwner'")
   Add-AzureADGroupOwner -ObjectId $AADGroup.ObjectId -RefObjectId $AADGroupOwner.ObjectId
@@ -271,22 +271,26 @@ Function Set-DM-SPDLPermissions ($SiteURL, $SiteName, $Library, $UserID, $ReadGr
   {
       #Connect PnP Online
       Connect-PnPOnline -URL $SiteURL -Interactive
-            
+      
       #Break Permission Inheritance of the List
+      Write-Host "Breaking inheritance"
       Set-PnPList -Identity $Library -BreakRoleInheritance -CopyRoleAssignments
        
       #Grant permission on List to User
-      Set-PnPListPermission -Identity $Library -AddRole "Edit" -User $UserID
+      Write-Host "Granting permissions to $UserID"
+      Set-PnPListPermission -Identity $Library -AddRole "Full Control" -User $UserID
        
       #Grant permission on list to Group
+      Write-Host "Granting permissions to groups"
       $ReadGroupID = (Get-AzureADGroup -Filter "DisplayName eq '$ReadGroupName'").ObjectId
       $ContribGroupID = (Get-AzureADGroup -Filter "DisplayName eq '$ContribGroupName'").ObjectId
-      $OwnerGroupID = (Get-AzureADGroup -Filter "DisplayName eq '$OwnerGroupName'").ObjectId
+      #$OwnerGroupID = (Get-AzureADGroup -Filter "DisplayName eq '$OwnerGroupName'").ObjectId
       Set-PnPListPermission -Identity $Library -User "c:0t.c|tenant|$ReadGroupId" -AddRole 'Read'
       Set-PnPListPermission -Identity $Library -User "c:0t.c|tenant|$ContribGroupId" -AddRole 'Contribute'
-      Set-PnPListPermission -Identity $Library -User "c:0t.c|tenant|$OwnerGroupId" -AddRole 'Owner'
+      #Set-PnPListPermission -Identity $Library -User "c:0t.c|tenant|$OwnerGroupId" -AddRole 'Owner'
 
       # Remove the permissions for built-in groups
+      Write-Host "Removing built-in permissions"
       $GroupName = "$SiteName Visitors"
       $Context = Get-PnPContext
       $List = Get-PnPList -Identity $Library
