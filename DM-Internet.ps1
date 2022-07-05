@@ -1,5 +1,3 @@
-# Test 2
-
 # Function: Get-DMUrlFromShortUrl
 # Purpose:  Resolve full URL from short URL
 # Usage:    $resolvedUrl = Get-DMUrlFromShortUrl -url "https://dm.wtf/test"
@@ -20,14 +18,6 @@ function Start-DMSpeedTest {
     $DownloadPath = "$path\SpeedTest.Zip"
     $ExtractToPath = "$path\SpeedTest"
     $SpeedTestEXEPath = "$path\SpeedTest\speedtest.exe"
-    $LogPath = "$path\SpeedTestLog.txt"
-
-    #Start Logging to a Text File
-    $ErrorActionPreference="SilentlyContinue"
-    Stop-Transcript | out-null
-    $ErrorActionPreference = "Continue"
-    Start-Transcript -path $LogPath -Append:$false
-    #check for and delete existing log files
 
     #check if file exists
     if (Test-Path $SpeedTestEXEPath -PathType leaf)
@@ -49,13 +39,9 @@ function Start-DMSpeedTest {
 
             [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $outpath)
         }
-
         Unzip $DownloadPath $ExtractToPath
     }
     Write-Host "Starting test" -ForegroundColor Green
     $test = & $SpeedTestEXEPath --accept-license
-
-    #stop logging
-    Stop-Transcript
     return $test
 }
