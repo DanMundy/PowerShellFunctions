@@ -52,4 +52,5 @@ function Download-DMPSFunction ($name) {
     $file = "$name.ps1"
     if (Test-Path .\$file) { Remove-Item .\$file }
     Invoke-WebRequest "https://raw.githubusercontent.com/DanMundy/PowerShellFunctions/main/$file" -OutFile .\$file
+    # wget https://dm.wtf/psf
 }
