@@ -11,6 +11,7 @@ function Get-DMUrlFromShortUrl ($url) {
 # 
 # Resources:
 # SpeedTest.Net CLI: https://www.speedtest.net/apps/cli
+# Invoke-WebRequest 'https://raw.githubusercontent.com/DanMundy/PowerShellFunctions/main/DM-Internet.ps1' -OutFile .\DM-Internet.ps1
 
 function Start-DMSpeedTest {
     $path = $env:TEMP
