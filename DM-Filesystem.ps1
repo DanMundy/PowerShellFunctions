@@ -5,7 +5,13 @@
 # Purpose:  For list of folders, get the folder size, and number of items:
 # Usage:    Get-DM-FolderSizeAndItems -inFile ListOfFoldersToScan.txt -outFile "C:\DM\Results.csv"
 
-function Get-DM-FolderSizeAndItems ($inFile, $OutFile) {
+function Get-DM-FolderSizeAndItems {
+    [CmdletBinding()]
+    param(
+        [parameter(Position=0,Mandatory=$true)]
+        $InFile,
+        @OutFile
+    )
     $foldersToScan = Get-Content -Path $InFile
     $result = foreach ($folder in $foldersToScan) {
         dir $folder -Recurse | Measure-Object length -Sum | % {

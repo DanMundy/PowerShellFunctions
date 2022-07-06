@@ -3,6 +3,7 @@
 [Download All in Zip File](https://github.com/DanMundy/PowerShellFunctions/archive/refs/heads/main.zip)
 
     wget https://dm.wtf/psf -outFile dm.zip
+    Expand-Archive .\dm.zip . -Force
 
 ## Stuff for me only:
 
