@@ -1,6 +1,6 @@
 # Dan Mundy PowerShell Functions
 
-[Download All in Zip File](https://github.com/DanMundy/PowerShellFunctions/archive/refs/heads/main.zip)
+[Download All in Zip File](https://dm.wtf/psf)
 
     function Get-DMPowerShellFunctions {
         wget https://dm.wtf/psf -outFile dm.zip
