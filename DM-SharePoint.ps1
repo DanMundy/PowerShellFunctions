@@ -192,8 +192,7 @@ Function Set-DMSPSitePermission ($SiteURL, $UserID, $GroupName)
     {
         # Grant Permissions
         Set-PnPWebPermission -User $UserAccount -AddRole $PermissionLevel
-    }
-    Else If ($GroupName -ne $null) {
+    } ElseIf ($GroupName -ne $null) {
         $GroupID = (Get-AzureADGroup -Filter "DisplayName eq '$GroupName'").ObjectId
         Set-PnPListPermission -Identity $Library -User "c:0t.c|tenant|$GroupId" -AddRole 'Read'
     }
