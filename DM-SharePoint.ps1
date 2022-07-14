@@ -180,21 +180,23 @@ Function New-DM-SPSite ($AdminCenterURL, $SiteURL, $SiteName, $SiteOwner, $Templ
 # Usage:    Set-DMSPSitePermission -SiteURL "https://crescent.sharepoint.com/sites/Warehouse" -UserID "Salaudeen@crescent.com" -PermissionLevel "Full Control"
 ## Todo: Function to remove default permissions
 
-Function Set-DMSPSitePermission ($SiteURL, $SiteName, $UserID, $ReadGroupName, $ContribGroupName,$OwnerGroupName)
+Function Set-DMSPSitePermission ($SiteURL, $UserID, $GroupName)
 {
   Try
   {
     #Connect PnP Online
     Write-Host "Connecting to PnP Online"
-    Connect-PnPOnline -URL $SiteURL -Interactive   
+    Connect-PnPOnline -URL $SiteURL -Interactive
 
-    # Grant Permissions
-    Set-PnPWebPermission -User $UserAccount -AddRole $PermissionLevel
-    $ReadGroupID = (Get-AzureADGroup -Filter "DisplayName eq '$ReadGroupName'").ObjectId
-    $ContribGroupID = (Get-AzureADGroup -Filter "DisplayName eq '$ContribGroupName'").ObjectId
-    #$OwnerGroupID = (Get-AzureADGroup -Filter "DisplayName eq '$OwnerGroupName'").ObjectId
-    Set-PnPListPermission -Identity $Library -User "c:0t.c|tenant|$ReadGroupId" -AddRole 'Read'
-    Set-PnPListPermission -Identity $Library -User "c:0t.c|tenant|$ContribGroupId" -AddRole 'Contribute'
+    If ($UserID -ne $null)
+    {
+        # Grant Permissions
+        Set-PnPWebPermission -User $UserAccount -AddRole $PermissionLevel
+    }
+    Else If ($GroupName -ne $null) {
+        $GroupID = (Get-AzureADGroup -Filter "DisplayName eq '$GroupName'").ObjectId
+        Set-PnPListPermission -Identity $Library -User "c:0t.c|tenant|$GroupId" -AddRole 'Read'
+    }
   }
   Catch {
      write-host -f Red "`tError setting Permissions" $_.Exception.Message
