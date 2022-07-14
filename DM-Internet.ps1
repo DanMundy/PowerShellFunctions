@@ -1,3 +1,5 @@
+## ----------------------------------------------------------------------------
+
 # Function: Get-DMUrlFromShortUrl
 # Purpose:  Resolve full URL from short URL
 # Usage:    $resolvedUrl = Get-DMUrlFromShortUrl -url "https://dm.wtf/test"
@@ -5,12 +7,11 @@ function Get-DMUrlFromShortUrl ($url) {
     return (((Invoke-WebRequest -UseBasicParsing -Uri $url).baseresponse).ResponseUri).AbsoluteUri
 }
 
-# ----------
-
+## ----------------------------------------------------------------------------
 
 # 
 # Resources:
-# SpeedTest.Net CLI: https://www.speedtest.net/apps/cli
+#     SpeedTest.Net CLI: https://www.speedtest.net/apps/cli
 
 function Start-DMSpeedTest {
     $path = $env:TEMP
@@ -46,7 +47,7 @@ function Start-DMSpeedTest {
     return $test
 }
 
-# ----------
+## ----------------------------------------------------------------------------
 
 function Download-DMPSFunction ($name) {
     $file = "$name.ps1"
@@ -54,3 +55,5 @@ function Download-DMPSFunction ($name) {
     Invoke-WebRequest "https://raw.githubusercontent.com/DanMundy/PowerShellFunctions/main/$file" -OutFile .\$file
     # wget https://dm.wtf/psf
 }
+
+## ----------------------------------------------------------------------------

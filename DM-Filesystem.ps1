@@ -1,6 +1,8 @@
 ### DanMundyPSFunctions: Filesystem
 ### Version: 20220616T1729
 
+## ----------------------------------------------------------------------------
+
 # Function: Get-DMUsersWithHomeDrive
 # Purpose:  For list of folders, get the folder size, and number of items:
 # Usage:    Get-DM-FolderSizeAndItems -inFile ListOfFoldersToScan.txt -outFile "C:\DM\Results.csv"
@@ -25,6 +27,8 @@ function Get-DM-FolderSizeAndItems {
     $result | Export-CSV -NoTypeInformation -Path $OutFile
 }
 
+## ----------------------------------------------------------------------------
+
 ## Function: Get-DMSmbSharePaths
 ## Purpose:  Exports CSV of all fileshares and their path
 ##           Does a better job than just "net share" as you can just open it in Excel
@@ -39,9 +43,8 @@ function Get-DMSmbSharePaths ($ServerName,$OutFile) {
     $Shares | Select __Server,Name,Path | Export-Csv -NoTypeInformation -Path $OutFile
     #$Shares | Export-Csv -Path $OutFile
 }
-Get-DMSmbSharePaths -ServerName "MULLINS-FILES01" -OutFile C:\C1\mullins-shares-files01.csv
 
-### ----------
+## ----------------------------------------------------------------------------
 
 # Function: Get-DM-DirectoryUsage
 # Purpose: Show size of subdirectories, 1 level deep
@@ -56,3 +59,5 @@ function Get-DM-DirectoryUsage ($startFolder) {
         $i.FullName + " -- " + "{0:N2}" -f ($subFolderItems.sum / 1MB) + " MB"
     }
 }
+
+## ----------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 ### DanMundyPSFunctions: Veeam
 ### Version: 20220629T1259
 
-### ----------
+## ----------------------------------------------------------------------------
 
 # Function: Function Get-DMVBRLastTapeWritten
 # Purpose:  Shows which tape was last written to
@@ -14,7 +14,7 @@ Function Get-DMVBRLastTapeWritten {
     return $lastTape
 }
 
-### ----------
+## ----------------------------------------------------------------------------
 
 # Function: Move-DM-ExpiredTapesToFreePool
 # Purpose:  Move any expired tapes to the free media pool
@@ -47,7 +47,7 @@ function Move-DM-ExpiredTapesToFreePool {
     }
 }
 
-### ----------
+## ----------------------------------------------------------------------------
 
 # Function: Import-DMs-TapeFromIoSlot
 # Purpose:  Import a new tape,
@@ -67,7 +67,7 @@ function Import-DMs-TapeFromIoSlot($maxTapes) {
     }
 }
 
-### ----------
+## ----------------------------------------------------------------------------
 
 
 # Usable Tapes:
@@ -86,6 +86,8 @@ function Get-DMVBRWriteableTapes {
     } | Sort-Object -Property @{Expression = {$_.IsFree}; Ascending = $false}, ExpirationDate,Barcode
 }
 
+## ----------------------------------------------------------------------------
+
 # Not Yet Usable Tapes:
 # Usage: Get-DMVBRNotWriteableTapes | ft Barcode,MediaSet,ExpirationDate
 function Get-DMVBRNotWriteableTapes {
@@ -100,7 +102,7 @@ function Get-DMVBRNotWriteableTapes {
     } | Sort-Object -Property @{Expression = {$_.IsFree}; Ascending = $false}, ExpirationDate,Barcode
 }
 
-### ----------
+## ----------------------------------------------------------------------------
 
 # Handy ref for generating mail body text:
 
@@ -111,3 +113,5 @@ function Get-DMVBRNotWriteableTapes {
 #Add-Content C:\Scripts\MailBody.txt "     (see the list below for help choosing which tape to insert)"
 #$writeableTapes = Get-DMVBRWriteableTapes
 #$writeableTapes | Out-File -Encoding UTF8 -Append C:\Scripts\MailBody.txt
+
+## ----------------------------------------------------------------------------
