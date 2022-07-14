@@ -180,7 +180,7 @@ Function New-DM-SPSite ($AdminCenterURL, $SiteURL, $SiteName, $SiteOwner, $Templ
 # Usage:    Set-DMSPSitePermission -SiteURL "https://crescent.sharepoint.com/sites/Warehouse" -UserID "Salaudeen@crescent.com" -PermissionLevel "Full Control"
 ## Todo: Function to remove default permissions
 
-Function Set-DMSPSitePermission ($SiteURL, $UserID, $GroupName)
+Function Set-DMSPSitePermission ($SiteURL, $UserID, $GroupName, $PermissionLevel)
 {
   Try
   {
