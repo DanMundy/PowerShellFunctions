@@ -178,6 +178,7 @@ Function New-DM-SPSite ($AdminCenterURL, $SiteURL, $SiteName, $SiteOwner, $Templ
 # Function: Set-DMSPSitePermission
 # Purpose:  Grant access to SharePoint Online site
 # Usage:    Set-DMSPSitePermission -SiteURL "https://crescent.sharepoint.com/sites/Warehouse" -UserID "Salaudeen@crescent.com" -PermissionLevel "Full Control"
+## Todo: Function to remove default permissions
 
 Function Set-DMSPSitePermission ($SiteURL, $SiteName, $UserID, $ReadGroupName, $ContribGroupName,$OwnerGroupName)
 {
@@ -189,6 +190,11 @@ Function Set-DMSPSitePermission ($SiteURL, $SiteName, $UserID, $ReadGroupName, $
 
     # Grant Permissions
     Set-PnPWebPermission -User $UserAccount -AddRole $PermissionLevel
+    $ReadGroupID = (Get-AzureADGroup -Filter "DisplayName eq '$ReadGroupName'").ObjectId
+    $ContribGroupID = (Get-AzureADGroup -Filter "DisplayName eq '$ContribGroupName'").ObjectId
+    #$OwnerGroupID = (Get-AzureADGroup -Filter "DisplayName eq '$OwnerGroupName'").ObjectId
+    Set-PnPListPermission -Identity $Library -User "c:0t.c|tenant|$ReadGroupId" -AddRole 'Read'
+    Set-PnPListPermission -Identity $Library -User "c:0t.c|tenant|$ContribGroupId" -AddRole 'Contribute'
   }
   Catch {
      write-host -f Red "`tError setting Permissions" $_.Exception.Message
