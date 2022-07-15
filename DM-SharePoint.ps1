@@ -191,8 +191,10 @@ Function Set-DMSPSitePermission ($SiteURL, $UserID, $GroupName, $PermissionLevel
     If ($UserID -ne $null)
     {
         # Grant Permissions
+        Write-Host "Granting permissions to user"
         Set-PnPWebPermission -User $UserAccount -AddRole $PermissionLevel
     } ElseIf ($GroupName -ne $null) {
+        Write-Host "Granting permissions to group"
         $GroupID = (Get-AzureADGroup -Filter "DisplayName eq '$GroupName'").ObjectId
         Set-PnPListPermission -Identity $Library -User "c:0t.c|tenant|$GroupId" -AddRole 'Read'
     }
@@ -218,7 +220,8 @@ Function New-DM-SPDocumentLibrary($SiteURL, $LibraryName)
   Try
   {
       #Connect to SharePoint Online
-      Connect-PnPOnline -URL $SiteURL -Interactive
+      #Connect-PnPOnline -URL $SiteURL -Interactive
+      if($azureConnection.Account -eq $null){ $global:azureConnection = Connect-AzureAD } # Connect to AAD
 
       Write-host -f Yellow "`nEnsuring Library '$LibraryName'"
         
