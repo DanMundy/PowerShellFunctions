@@ -184,20 +184,21 @@ Function Set-DMSPSitePermission ($SiteURL, $UserID, $GroupName, $PermissionLevel
 {
   Try
   {
+    # Connect to PnP Online:
+    Connect-PnPOnline -URL $SiteURL -Interactive
     If ($UserID -ne $null)
     {
-        # Connect to PnP Online:
-        Connect-PnPOnline -URL $SiteURL -Interactive
         # Grant permissions:
         Write-Host "Granting permissions to user"
         Set-PnPWebPermission -User $UserID -AddRole $PermissionLevel
     } ElseIf ($GroupName -ne $null) {
         # Connect to AAD:
-        if($azureConnection.Account -eq $null){ $global:azureConnection = Connect-AzureAD } # Connect to AAD
-        # GRant permissions:
-        Write-Host "Granting permissions to group"
+        if($azureConnection.Account -eq $null){ $global:azureConnection = Connect-AzureAD }
+        # Get the Group ID:
         $GroupID = (Get-AzureADGroup -Filter "DisplayName eq '$GroupName'").ObjectId
-        Set-PnPListPermission -Identity $Library -User "c:0t.c|tenant|$GroupId" -AddRole 'Read'
+        # Grant permissions:
+        Write-Host "Granting permissions to group"
+        Set-PnPWebPermission -User "c:0t.c|tenant|$GroupId" -AddRole $PermissionLevel
     }
   }
   Catch {
