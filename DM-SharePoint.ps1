@@ -192,7 +192,7 @@ Function Set-DMSPSitePermission ($SiteURL, $UserID, $GroupName, $PermissionLevel
     {
         # Grant Permissions
         Write-Host "Granting permissions to user"
-        Set-PnPWebPermission -User $UserAccount -AddRole $PermissionLevel
+        Set-PnPWebPermission -User $UserID -AddRole $PermissionLevel
     } ElseIf ($GroupName -ne $null) {
         Write-Host "Granting permissions to group"
         $GroupID = (Get-AzureADGroup -Filter "DisplayName eq '$GroupName'").ObjectId
