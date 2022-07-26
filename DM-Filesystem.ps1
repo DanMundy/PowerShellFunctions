@@ -62,12 +62,14 @@ function Get-DM-DirectoryUsage ($startFolder) {
 
 ## ----------------------------------------------------------------------------
 
-Function Get-DMFilesByLastModified ($folder, $olderThanDays,$newerThanDays) {
-    If ($olderThanDays -ne $null)
+Function Get-DMFilesByLastModified ($folder, $olderThan,$newerThan,$Days) {
+    $xDaysAgo = (Get-Date).AddDays(-$Days)
+    echo $xDaysAgo
+    If ($olderThan -ne $null)
     {
-        Get-ChildItem $folder | Where-Object {$_.LastWriteTime -lt (Get-Date).AddDays($newerThanDays)}
-    } ElseIf ($newerThanDays -ne $null) {
-        Get-ChildItem $folder | Where-Object {$_.LastWriteTime -gt (Get-Date).AddDays($olderThanDays)}
+        Get-ChildItem $folder | Where-Object {$_.LastWriteTime -lt $xDaysAgo}
+    } ElseIf ($newerThan -ne $null) {
+        Get-ChildItem $folder | Where-Object {$_.LastWriteTime -gt $xDaysAgo}
     }
 }
 
