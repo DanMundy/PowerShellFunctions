@@ -407,15 +407,16 @@ Function Set-DM-SPDLPermissions ($SiteURL, $SiteName, $Library, $UserID, $ReadGr
 Function Connect-DMSPMigration ($url, $userName, $password) {
     if (Test-Path "$env:UserProfile\Documents\WindowsPowerShell\Modules\Microsoft.SharePoint.MigrationTool.PowerShell")
     {
+        #Import SPMT Migration Module#
+        cd $env:UserProfile\Documents\WindowsPowerShell\Modules\Microsoft.SharePoint.MigrationTool.PowerShell
+        Import-Module Microsoft.SharePoint.MigrationTool.PowerShell
+        Write-Host "Connected (hopefully)"
         #Define SPO target#
         $Global:SPOUrl = $url
         $Global:UserName = $userName
         $Global:PassWord = ConvertTo-SecureString -String $password -AsPlainText -Force
         $Global:SPOCredential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $Global:UserName, $Global:PassWord
 
-        #Import SPMT Migration Module#
-        cd $env:UserProfile\Documents\WindowsPowerShell\Modules\Microsoft.SharePoint.MigrationTool.PowerShell
-        Import-Module Microsoft.SharePoint.MigrationTool.PowerShell
 
         #Register the SPMT session with SPO credentials#
         Register-SPMTMigration -SPOCredential $Global:SPOCredential -Force
