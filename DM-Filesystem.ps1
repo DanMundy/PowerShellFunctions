@@ -64,13 +64,11 @@ function Get-DM-DirectoryUsage ($startFolder) {
 
 Function Get-DMFilesOlderThan ($folder,$Days) {
     $xDaysAgo = (Get-Date).AddDays(-$Days)
-    echo $xDaysAgo
     Get-ChildItem $folder | Where-Object {$_.LastWriteTime -lt $xDaysAgo}
 }
 Function Get-DMFilesModifiedWithin ($folder,$Days) {
     $xDaysAgo = (Get-Date).AddDays(-$Days)
-    echo $xDaysAgo
-    Get-ChildItem $folder | Where-Object {$_.LastWriteTime -gt $xDaysAgo} | Write-Host $_.FullName
+    Get-ChildItem $folder | Where-Object {$_.LastWriteTime -gt $xDaysAgo} | % { Write-Host $_.FullName }
 }
 
 ## ----------------------------------------------------------------------------
