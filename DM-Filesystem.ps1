@@ -66,7 +66,7 @@ Function Get-DMFilesByLastModified ($folder, $olderThanDays,$newerThanDays) {
     If ($olderThanDays -ne $null)
     {
         Get-ChildItem $folder | Where-Object {$_.LastWriteTime -lt (Get-Date).AddDays(-$newerThanDays)}
-    } Else If ($newerThanDays -ne $null) {
+    } ElseIf ($newerThanDays -ne $null) {
         Get-ChildItem $folder | Where-Object {$_.LastWriteTime -gt (Get-Date).AddDays(-$olderThanDays)}
     }
 }
