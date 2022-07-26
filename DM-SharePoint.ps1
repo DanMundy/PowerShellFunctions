@@ -405,17 +405,24 @@ Function Set-DM-SPDLPermissions ($SiteURL, $SiteName, $Library, $UserID, $ReadGr
 # Usage:      Connect-DMSPMigration -url "https://contoso.sharepoint.com" -userName "admin@contoso.onmicrosoft.com" -password "YourSPOPassword"
 # Depends on: https://aka.ms/spmt-ga-page (more info: https://dm.wtf/TUZD)
 Function Connect-DMSPMigration ($url, $userName, $password) {
-    #Define SPO target#
-    $Global:SPOUrl = $url
-    $Global:UserName = $userName
-    $Global:PassWord = ConvertTo-SecureString -String $password -AsPlainText -Force
-    $Global:SPOCredential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $Global:UserName, $Global:PassWord
+    if (Test-Path "$env:UserProfile\Documents\WindowsPowerShell\Modules\Microsoft.SharePoint.MigrationTool.PowerShell")
+    {
+        #Define SPO target#
+        $Global:SPOUrl = $url
+        $Global:UserName = $userName
+        $Global:PassWord = ConvertTo-SecureString -String $password -AsPlainText -Force
+        $Global:SPOCredential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $Global:UserName, $Global:PassWord
 
-    #Import SPMT Migration Module#
-    Import-Module Microsoft.SharePoint.MigrationTool.PowerShell
+        #Import SPMT Migration Module#
+        cd $env:UserProfile\Documents\WindowsPowerShell\Modules\Microsoft.SharePoint.MigrationTool.PowerShell
+        Import-Module Microsoft.SharePoint.MigrationTool.PowerShell
 
-    #Register the SPMT session with SPO credentials#
-    Register-SPMTMigration -SPOCredential $Global:SPOCredential -Force
+        #Register the SPMT session with SPO credentials#
+        Register-SPMTMigration -SPOCredential $Global:SPOCredential -Force
+    }
+    else {
+        Write-Host "Download and install SPMT from https://aka.ms/spmt-ga-page"
+    }
 }
 
 ## ----------------------------------------------------------------------------
