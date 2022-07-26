@@ -12,7 +12,7 @@ function Get-DM-FolderSizeAndItems {
     param(
         [parameter(Position=0,Mandatory=$true)]
         $InFile,
-        @OutFile
+        $OutFile
     )
     $foldersToScan = Get-Content -Path $InFile
     $result = foreach ($folder in $foldersToScan) {
