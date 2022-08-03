@@ -14,13 +14,13 @@ function Get-DM-FolderSizeAndItems {
         $InFile,
         $OutFile
     )
-    $foldersToScan = Get-Content -Path $InFile
-    $result = foreach ($folder in $foldersToScan) {
-        dir $folder -Recurse | Measure-Object length -Sum | % {
+    $FoldersToScan = Get-Content -Path $InFile
+    $result = foreach ($Folder in $FoldersToScan) {
+        dir $Folder -Recurse | Measure-Object length -Sum | % {
     New-Object psobject -prop @{
-        Name = $folder
+        Name = $Folder
         Size = $_.sum
-        Items = (Get-ChildItem -Path $folder -Recurse | Measure-Object).Count
+        Items = (Get-ChildItem -Path $Folder -Recurse | Measure-Object).Count
     }
         }
     }
@@ -33,9 +33,9 @@ function Get-DM-FolderSizeAndItems {
 ## Purpose:  Exports CSV of all fileshares and their path
 ##           Does a better job than just "net share" as you can just open it in Excel
 ##           Created this for Windows Server 2008 R2 where Get-SmbShare isn't available
-## Usage:    Get-DMSmbSharePaths -ServerName "SERVER01" -OutFile "C:\DM\Results.csv"
+## Usage:    Get-DMSmbSharePaths -OutFile "C:\DM\Results.csv"
 
-function Get-DMSmbSharePaths ($ServerName,$OutFile) {
+function Get-DMSmbSharePaths ($OutFile) {
     $Shares = gwmi -class win32_share
     #$Shares | ForEach-Object {
     #    ("\\"+$ServerName + "\" + $_.Name +"," +$_.Path)
@@ -62,13 +62,19 @@ function Get-DM-DirectoryUsage ($startFolder) {
 
 ## ----------------------------------------------------------------------------
 
-Function Get-DMFilesOlderThan ($folder,$Days) {
+# Function: Get-DMFilesOlderThan and Get-DMFilesModifiedWithin
+#           (so similar, may as well be considered as one. Usage examples apply to both)
+# Usage:    Get-DMFilesModifiedWithin -folder "C:\Folder1" -Days 30
+#           Get-DMFilesModifiedWithin -folder ("C:\Folder1","C:\Folder2") -Days 30
+Function Get-DMFilesOlderThan ($Folder,$Days) {
     $xDaysAgo = (Get-Date).AddDays(-$Days)
-    Get-ChildItem $folder | Where-Object {$_.LastWriteTime -lt $xDaysAgo} | % { Write-Host $_.FullName }
+    Get-ChildItem $Folder | Where-Object {$_.LastWriteTime -lt $xDaysAgo} | % { Write-Host $_.FullName }
 }
-Function Get-DMFilesModifiedWithin ($folder,$Days) {
+
+Function Get-DMFilesModifiedWithin ($Folder,$Days) {
     $xDaysAgo = (Get-Date).AddDays(-$Days)
-    Get-ChildItem $folder | Where-Object {$_.LastWriteTime -gt $xDaysAgo} | % { Write-Host $_.FullName }
+    #todo - I think it probably should be X days minus another 1, will probably add that, but needs testing
+    Get-ChildItem $Folder | Where-Object {$_.LastWriteTime -gt $xDaysAgo} | % { Write-Host $_.FullName }
 }
 
 ## ----------------------------------------------------------------------------

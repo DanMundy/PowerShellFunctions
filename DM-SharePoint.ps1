@@ -71,7 +71,7 @@ function Get-DM-AzureADGroupMember ($GroupName) {
 
 # Function:
 # Purpose:
-# Usage: Add-DM-AzureADGroupMember -GroupName "SP-S-SITENAME-DL-LIBRARYNAME-P-CONTRIB" -UserUPN "user@mundy.co"
+Add-DM-AzureADGroupMember -GroupName "SP-S-SITENAME-DL-LIBRARYNAME-P-CONTRIB" -UserUPN "user@mundy.co"
 function Add-DM-AzureADGroupMember ($GroupName, $UserUPN) {
     if($azureConnection.Account -eq $null){ $global:azureConnection = Connect-AzureAD } # Connect to AAD
     $GroupID = (Get-AzureADGroup -Filter "DisplayName eq '$GroupName'").ObjectId
@@ -279,7 +279,7 @@ Function New-DM-SPDocumentLibrary($SiteURL, $LibraryName)
 # (wait 5 minutes)
 # 6 = For DLs, break permission inheritance, set new permissions
 # Usage (note: Wait 5 minutes after creating the DLs, or this function may fail)
-# Usage: Set-DM-SPDLPermissions -SiteURL "https://mundy.sharepoint.com/sites/SITENAME" -SiteName "SITENAME" -Library "Sales" -UserID "admin@mundy.onmicrosoft.com" -ReadGroupName "SP-S-SITENAME-DL-Sales-P-READ" -ContribGroupName "SP-S-SITENAME-DL-Salez-P-CONTRIB"
+# Usage: Set-DM-SPDLPermissions -SiteURL "https://mundy.sharepoint.com/sites/SITENAME" -SiteName "SITENAME" -Library "Sales" -UserID "admin@mundy.onmicrosoft.com" -ReadGroupName "SP-S-SITENAME-DL-Sales-P-READ" -ContribGroupName "SP-S-SITENAME-DL-Sales-P-CONTRIB"
 # Usage: Set-DM-SPDLPermissions -SiteURL "https://mundy.sharepoint.com/sites/SITENAME2" -SiteName "SITENAME2" -Library "Finance" -UserID "admin@mundy.onmicrosoft.com" -ReadGroupName "SP-S-SITENAME2-DL-Finance-P-READ" -ContribGroupName "SP-S-SITENAME-DL-Finance-P-CONTRIB"
 #
 # ------------------------------
