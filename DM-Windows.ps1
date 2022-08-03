@@ -44,5 +44,5 @@ function Install-DM-WindowsFeatureUpdate {
         
     sleep 10
 
-    Remove-Item "C:\_Windows_FU" -Recurse -Force -Confirm:$false
+    #Remove-Item "C:\_Windows_FU" -Recurse -Force -Confirm:$false
 }
