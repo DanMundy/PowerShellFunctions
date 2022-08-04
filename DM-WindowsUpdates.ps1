@@ -3,20 +3,6 @@
 
 ## ----------------------------------------------------------------------------
 
-# Function: Get-DM-LastBootTime
-# Purpose:  Show when Windows was booted
-# Usage:    Get-DM-LastBootTime
-
-function Get-DMLastBootTime {
-    Get-WmiObject win32_operatingsystem | select csname, @{LABEL='LastBootUpTime';EXPRESSION={$_.ConverttoDateTime($_.lastbootuptime)}}
-}
-
-function Get-DMRebootHistory {
-    Get-WmiObject Win32_NTLogEvent -filter "LogFile='System' and EventCode=6005" | Select ComputerName, EventCode, @{LABEL='TimeWritten';EXPRESSION={$_.ConverttoDateTime($_.TimeWritten)}}
-}
-
-## ----------------------------------------------------------------------------
-
 # Function: Get-DM-InstallFeatureUpdate
 # Purpose:  
 # Usage:    Get-DM-LastBootTime
@@ -45,4 +31,17 @@ function Install-DM-WindowsFeatureUpdate {
     sleep 10
 
     #Remove-Item "C:\_Windows_FU" -Recurse -Force -Confirm:$false
+}
+
+## ----------------------------------------------------------------------------
+
+# Function: Install-DM-WindowsUpdates
+# Purpose:  Silently install all available updates, no reboot
+# Usage:    Install-DM-WindowsUpdates
+
+function Install-DM-WindowsUpdates {
+    if(-not (Get-Module PSWindowsUpdate -ListAvailable)){
+    Install-Module PSWindowsUpdate -Scope CurrentUser -Force
+    }
+    Get-WindowsUpdate -Install -IgnoreUserInput -AcceptAll -IgnoreReboot
 }
