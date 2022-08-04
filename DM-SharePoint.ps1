@@ -6,8 +6,8 @@
 # Function: Connect-DMsSPSite
 # Purpose:  Uses PnP PowerShell to connect to a given URL
 # Usage: (eg)
-# Connect-DMsSPSite https://companyname.sharepoint.com
-# Connect-DMsSPSite https://companyname.sharepoint.com/sites/Sitename
+# Connect-DMsSPSite -Url https://companyname.sharepoint.com
+# Connect-DMsSPSite -Url https://companyname.sharepoint.com/sites/Sitename
 
 function Connect-DMsSPSite {
     [CmdletBinding()]

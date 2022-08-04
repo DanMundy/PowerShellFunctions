@@ -17,11 +17,11 @@ function Get-DM-FolderSizeAndItems {
     $FoldersToScan = Get-Content -Path $InFile
     $result = foreach ($Folder in $FoldersToScan) {
         dir $Folder -Recurse | Measure-Object length -Sum | % {
-    New-Object psobject -prop @{
-        Name = $Folder
-        Size = $_.sum
-        Items = (Get-ChildItem -Path $Folder -Recurse | Measure-Object).Count
-    }
+            New-Object psobject -prop @{
+                Name = $Folder
+                Size = $_.sum
+                Items = (Get-ChildItem -Path $Folder -Recurse | Measure-Object).Count
+            }
         }
     }
     $result | Export-CSV -NoTypeInformation -Path $OutFile
