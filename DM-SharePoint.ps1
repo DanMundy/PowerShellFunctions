@@ -70,8 +70,8 @@ function Get-DM-AzureADGroupMember ($GroupName) {
 ## ----------------------------------------------------------------------------
 
 # Function:
-# Purpose:
-Add-DM-AzureADGroupMember -GroupName "SP-S-SITENAME-DL-LIBRARYNAME-P-CONTRIB" -UserUPN "user@mundy.co"
+# Purpose: 
+# Usage: Add-DM-AzureADGroupMember -GroupName "SP-S-SITENAME-DL-LIBRARYNAME-P-CONTRIB" -UserUPN "user@mundy.co"
 function Add-DM-AzureADGroupMember ($GroupName, $UserUPN) {
     if($azureConnection.Account -eq $null){ $global:azureConnection = Connect-AzureAD } # Connect to AAD
     $GroupID = (Get-AzureADGroup -Filter "DisplayName eq '$GroupName'").ObjectId

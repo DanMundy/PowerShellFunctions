@@ -45,3 +45,35 @@ function Install-DM-WindowsUpdates {
     }
     Get-WindowsUpdate -Install -IgnoreUserInput -AcceptAll -IgnoreReboot
 }
+
+
+## ----------------------------------------------------------------------------
+
+# Function: Update-DM-PowerShellModule
+# Purpose:  Update (or Install) PowerShell Module
+# Usage:    Update-DM-PowerShellModule
+
+function Update-DM-PowerShellModule ($Name) {
+    # Check if module installed
+    if (Get-Module $Name -ListAvailable) {
+        # Update it:
+        # Update-Module PnP.PowerShell*
+        Update-Module $Name
+    } Else {
+        # Install if required
+        Install-Module $Name -Scope CurrentUser -Force
+    }
+}
+
+
+function Update-DM-PowerShellModule ($Name) {
+    # Check if module installed
+    if (Get-Module $Name -ListAvailable) {
+        # Update it:
+        # Update-Module PnP.PowerShell*
+        Update-Module $Name -Scope CurrentUser -Force
+    } Else {
+        # Install if required
+        Install-Module $Name -Scope CurrentUser -Force
+    }
+}
