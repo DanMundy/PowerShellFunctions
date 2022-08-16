@@ -38,12 +38,17 @@ function Install-DM-WindowsFeatureUpdate {
 # Function: Install-DM-WindowsUpdates
 # Purpose:  Silently install all available updates, no reboot
 # Usage:    Install-DM-WindowsUpdates
+# More info on PSWindowsUpdate: https://dm.wtf/BMZH
 
 function Install-DM-WindowsUpdates {
     if(-not (Get-Module PSWindowsUpdate -ListAvailable)){
     Install-Module PSWindowsUpdate -Scope CurrentUser -Force
     }
-    Get-WindowsUpdate -Install -IgnoreUserInput -AcceptAll -IgnoreReboot
+    Write-Host "Checking for available updates"
+    Get-WindowsUpdate
+    Write-Host "Installing updates"
+    Get-WindowsUpdate -Install -IgnoreUserInput -AcceptAll -AutoReboot  | Out-File "$env:Temp\$(Get-Date -f yyyy-MM-dd)-WindowsUpdate.log" -Append -Force
+    #Get-WindowsUpdate -Install -IgnoreUserInput -AcceptAll -IgnoreReboot
 }
 
 
