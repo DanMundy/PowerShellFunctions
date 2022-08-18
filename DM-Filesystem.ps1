@@ -50,7 +50,7 @@ Function Get-DM-FolderSizeAndItems {
 
 # Version 1.1
 
-Function Get-DMSmbSharePaths ($ComputerName,$OutFile,$OutAppend) {
+Function Get-DMSmbSharePaths {
     
     param (
         $ComputerName,
