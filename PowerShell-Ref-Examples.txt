@@ -1,0 +1,2 @@
+Best example of conditional parameter checking:
+Get-DMSmbSharePaths in FM-Filesystem.ps1
