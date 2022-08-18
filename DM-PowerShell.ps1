@@ -39,3 +39,7 @@ function Install-DM-Module ($Name,$CurrentUser) {
 # To save (export) the PoSh module to a shared network folder for further importing on other computers, run:
 #
 # Save-Module -Name PSWindowsUpdate –Path \\lon-fs02\psmodules\
+
+Function Get-DM-PowerShellVersion {
+    Return $PSVersionTable.PSVersion
+}

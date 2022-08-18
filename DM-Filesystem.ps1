@@ -1,5 +1,10 @@
 ### DanMundyPSFunctions: Filesystem
 ### Version: 20220616T1729
+# List of functions included in this file:
+#     Get-DMUsersWithHomeDrive
+#     Get-DMSmbSharePaths
+#     Get-DM-DirectoryUsage
+#     Get-DMFilesOlderThan and Get-DMFilesModifiedWithin
 
 ## ----------------------------------------------------------------------------
 
@@ -7,7 +12,7 @@
 # Purpose:  For list of folders, get the folder size, and number of items:
 # Usage:    Get-DM-FolderSizeAndItems -inFile ListOfFoldersToScan.txt -outFile "C:\DM\Results.csv"
 
-function Get-DM-FolderSizeAndItems {
+Function Get-DM-FolderSizeAndItems {
     [CmdletBinding()]
     param(
         [parameter(Position=0,Mandatory=$true)]
@@ -35,13 +40,24 @@ function Get-DM-FolderSizeAndItems {
 ##           Created this for Windows Server 2008 R2 where Get-SmbShare isn't available
 ## Usage:    Get-DMSmbSharePaths -OutFile "C:\DM\Results.csv"
 
-function Get-DMSmbSharePaths ($OutFile) {
-    $Shares = gwmi -class win32_share
-    #$Shares | ForEach-Object {
-    #    ("\\"+$ServerName + "\" + $_.Name +"," +$_.Path)
-    #}
-    $Shares | Select __Server,Name,Path | Export-Csv -NoTypeInformation -Path $OutFile
-    #$Shares | Export-Csv -Path $OutFile
+### Version 1.0 for backup:
+###V1.0-DELETEME###function Get-DMSmbSharePaths ($OutFile) {
+###V1.0-DELETEME###    $Shares = Get-WmiObject -class win32_share
+###V1.0-DELETEME###    #$Shares | ForEach-Object {
+###V1.0-DELETEME###    #    ("\\"+$ServerName + "\" + $_.Name +"," +$_.Path)
+###V1.0-DELETEME###    #}
+###V1.0-DELETEME###    $Shares | Select __Server,Name,Path | Export-Csv -NoTypeInformation -Path $OutFile
+###V1.0-DELETEME###    #$Shares | Export-Csv -Path $OutFile
+###V1.0-DELETEME###}
+
+# Version 1.1
+
+Function Get-DMSmbSharePaths ($OutFile) {
+    If ($OutFile -ne $Null) {
+        $Shares | Select __Server,Name,Path,Description | Export-Csv -NoTypeInformation -Path $OutFile
+    } Else {
+        $Shares | Select __Server,Name,Path,Description
+    }
 }
 
 ## ----------------------------------------------------------------------------
@@ -51,7 +67,7 @@ function Get-DMSmbSharePaths ($OutFile) {
 #          (like Linux's 'du --max-depth=1')
 # Usage: Get-DM-DirectoryUsage C:\ClusterStorage\CSV01
 #        Get-DM-DirectoryUsage C:\ClusterStorage\CSV01\Servers
-function Get-DM-DirectoryUsage ($startFolder) {
+Function Get-DM-DirectoryUsage ($startFolder) {
     $colItems = Get-ChildItem $startFolder | Where-Object {$_.PSIsContainer -eq $true} | Sort-Object
     foreach ($i in $colItems)
     {
