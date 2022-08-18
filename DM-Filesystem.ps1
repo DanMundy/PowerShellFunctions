@@ -38,23 +38,22 @@ Function Get-DM-FolderSizeAndItems {
 ## Purpose:  Exports CSV of all fileshares and their path
 ##           Does a better job than just "net share" as you can just open it in Excel
 ##           Created this for Windows Server 2008 R2 where Get-SmbShare isn't available
-## Usage:    Get-DMSmbSharePaths -OutFile "C:\DM\Results.csv"
-
-### Version 1.0 for backup:
-###V1.0-DELETEME###function Get-DMSmbSharePaths ($OutFile) {
-###V1.0-DELETEME###    $Shares = Get-WmiObject -class win32_share
-###V1.0-DELETEME###    #$Shares | ForEach-Object {
-###V1.0-DELETEME###    #    ("\\"+$ServerName + "\" + $_.Name +"," +$_.Path)
-###V1.0-DELETEME###    #}
-###V1.0-DELETEME###    $Shares | Select __Server,Name,Path | Export-Csv -NoTypeInformation -Path $OutFile
-###V1.0-DELETEME###    #$Shares | Export-Csv -Path $OutFile
-###V1.0-DELETEME###}
+## Usage:
+##           # Basic, display only:
+##           Get-DMSmbSharePaths
+##           # Export to CSV:
+##           Get-DMSmbSharePaths -OutFile "C:\DM\Results.csv"
+##           # Remote computer:
+##           Get-DMSmbSharePaths -ComputerName SERVER1
+##           # Multiple servers:
+##           Get-DMSmbSharePaths -ComputerName ("SERVER1","SERVER2") -OutFile "C:\DM\Results.csv"
 
 # Version 1.1
 
-Function Get-DMSmbSharePaths ($ComputerName,$OutFile) {
+Function Get-DMSmbSharePaths ($ComputerName,$OutFile,$Append) {
     $WMIParams = @{}
     If ($ComputerName) { $WMIParams.Add('ComputerName',$ComputerName)}
+    If ($Append) { $WMIParams.Add('Append',$True)}
 
     $Shares = Get-WmiObject -class win32_share @WMIParams
 
