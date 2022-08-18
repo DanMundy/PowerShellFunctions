@@ -52,7 +52,12 @@ Function Get-DM-FolderSizeAndItems {
 
 # Version 1.1
 
-Function Get-DMSmbSharePaths ($OutFile) {
+Function Get-DMSmbSharePaths ($ComputerName,$OutFile) {
+    $WMIParams = @{}
+    If ($ComputerName) { $WMIParams.Add('ComputerName',$ComputerName)}
+
+    $Shares = Get-WmiObject -class win32_share @WMIParams
+
     If ($OutFile -ne $Null) {
         $Shares | Select __Server,Name,Path,Description | Export-Csv -NoTypeInformation -Path $OutFile
     } Else {
