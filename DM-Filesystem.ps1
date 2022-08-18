@@ -63,7 +63,7 @@ Function Get-DMSmbSharePaths {
     If ($ComputerName) { $WMIParams.Add('ComputerName',$ComputerName)}
 
     If ($OutAppend -eq $True) {
-        $AppendIfTrue = $True
+        $AppendIfTrue = "True"
         Write-Host "Appending"
     } Else { 
         Write-Host "Not Appending"
