@@ -50,12 +50,12 @@ Function Get-DM-FolderSizeAndItems {
 
 # Version 1.1
 
-Function Get-DMSmbSharePaths ($ComputerName,$OutFile,$Append) {
+Function Get-DMSmbSharePaths ($ComputerName,$OutFile,$OutAppend) {
     $WMIParams = @{}
 
     If ($ComputerName) { $WMIParams.Add('ComputerName',$ComputerName)}
 
-    If ($Append) {
+    If ($OutAppend) {
         $AppendIfTrue = $True
         Write-Host "Appending"
     } Else { 
