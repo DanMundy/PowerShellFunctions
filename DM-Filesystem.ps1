@@ -55,20 +55,16 @@ Function Get-DMSmbSharePaths {
     param (
         $ComputerName,
         $OutFile,
-        [Switch] $AppendFile
     )
 
     $WMIParams = @{}
 
     If ($ComputerName) { $WMIParams.Add('ComputerName',$ComputerName)}
 
-    If ($AppendFile -eq $True) { $AppendIfTrue = "1"
-    } Else { $AppendIfTrue = "0" }
-
     $Shares = Get-WmiObject -class win32_share @WMIParams
 
     If ($OutFile -ne $Null) {
-        $Shares | Select __Server,Name,Path,Description | Export-Csv -NoTypeInformation -Delimiter ',' -Path $OutFile -Append $AppendIfTrue
+        $Shares | Select __Server,Name,Path,Description | Export-Csv -NoTypeInformation -Path $OutFile -Append
     } Else {
         $Shares | Select __Server,Name,Path,Description
     }
