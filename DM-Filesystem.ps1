@@ -53,7 +53,7 @@ Function Get-DM-FolderSizeAndItems {
 Function Get-DMSmbSharePaths ($ComputerName,$OutFile,$Append) {
     $WMIParams = @{}
     If ($ComputerName) { $WMIParams.Add('ComputerName',$ComputerName)}
-    If ($Append) { $WMIParams.Add('Append',$True)}
+    If ($Append) { $WMIParams.Add('Append',"$Append")}
 
     $Shares = Get-WmiObject -class win32_share @WMIParams
 
