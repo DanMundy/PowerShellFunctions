@@ -62,13 +62,8 @@ Function Get-DMSmbSharePaths {
 
     If ($ComputerName) { $WMIParams.Add('ComputerName',$ComputerName)}
 
-    If ($AppendFile -eq $True) {
-        $AppendIfTrue = "1"
-        Write-Host "Appending"
-    } Else { 
-        Write-Host "Not Appending"
-        $AppendIfTrue = "0"
-    }
+    If ($AppendFile -eq $True) { $AppendIfTrue = "1"
+    } Else { $AppendIfTrue = "0" }
 
     $Shares = Get-WmiObject -class win32_share @WMIParams
 
