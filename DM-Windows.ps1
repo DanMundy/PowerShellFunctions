@@ -98,6 +98,7 @@ function New-DM-OfficeShortcuts ($LogFile) {
     #Stop logging PS script for troubleshooting.
     Stop-Transcript
 }
+# New-DM-OfficeShortcuts -LogFile "$env:Temp\New-Object-Desktop-Shortcuts.log"
 
 
 ## ----------------------------------------------------------------------------
