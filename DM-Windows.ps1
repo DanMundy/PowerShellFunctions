@@ -90,10 +90,10 @@ function New-DM-OfficeShortcuts ($LogFile) {
     New-DM-Shortcut -TargetFile "C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE" -ShortcutFile "C:\Users\Public\Desktop\Word.lnk"
 
     #Create Microsoft Internet Exporer public desktop shortcut.
-    New-DM-Shortcut -TargetFile "C:\Program Files\Internet Explorer\iexplore.exe" -ShortcutFile "C:\Users\Public\Desktop\Internet Explorer.lnk"
+    #New-DM-Shortcut -TargetFile "C:\Program Files\Internet Explorer\iexplore.exe" -ShortcutFile "C:\Users\Public\Desktop\Internet Explorer.lnk"
 
     #Create Google Chrome desktop shortcut.
-    New-DM-Shortcut -TargetFile "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" -ShortcutFile "C:\Users\Public\Desktop\Google Chrome.lnk"
+    #New-DM-Shortcut -TargetFile "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" -ShortcutFile "C:\Users\Public\Desktop\Google Chrome.lnk"
 
     #Stop logging PS script for troubleshooting.
     Stop-Transcript
@@ -120,3 +120,7 @@ function Set-DM-HostnameBasedOnSerial ($Prefix) {
 ## ----------------------------------------------------------------------------
 
 ## ----------------------------------------------------------------------------
+
+function Get-DM-DeviceSerialNumber {
+    return (Get-WmiObject Cim_Chassis).SerialNumber)
+}
