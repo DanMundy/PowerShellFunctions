@@ -3,13 +3,13 @@
 
 ## ----------------------------------------------------------------------------
 
-# Function: Connect-DMsSPSite
+# Function: Connect-DM-SPSite
 # Purpose:  Uses PnP PowerShell to connect to a given URL
 # Usage: (eg)
-# Connect-DMsSPSite -Url https://companyname.sharepoint.com
-# Connect-DMsSPSite -Url https://companyname.sharepoint.com/sites/Sitename
+# Connect-DM-SPSite -Url https://companyname.sharepoint.com
+# Connect-DM-SPSite -Url https://companyname.sharepoint.com/sites/Sitename
 
-function Connect-DMsSPSite {
+function Connect-DM-SPSite {
     [CmdletBinding()]
     param (
         $url

@@ -12,7 +12,8 @@
 # (if eg SharePoint URL is "https://companyname.sharepoint.com" then Tenant is "companyname")
 
 function Get-DMOneDriveSites ($tenant, $outFile) { 
-    if($azureConnection.Account -eq $null){ $global:azureConnection = Connect-AzureAD } # Connect to AAD
+    if ($(get-pnpcontext).url -ne $tenant) { Connect-DM-SPSite -Url $tenant }
+    #if($azureConnection.Account -eq $null){ $global:azureConnection = Connect-AzureAD } # Connect to AAD
      
     #Get OneDrive Site Details and export to CSV
     $Result = Get-PnPTenantSite -IncludeOneDriveSites -Filter "Url -like 'https://$tenant-my.sharepoint.com/personal/'" |
