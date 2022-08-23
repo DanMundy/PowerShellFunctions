@@ -17,9 +17,9 @@ function Get-DMOneDriveSites ($tenant, $outFile) {
     #Get OneDrive Site Details and export to CSV
     $Result = Get-PnPTenantSite -IncludeOneDriveSites -Filter "Url -like 'https://$tenant-my.sharepoint.com/personal/'"
     If ($OutFile -ne $Null) {
-        $Result | Select Title, URL, Owner, LastContentModifiedDate, StorageUsage | Export-Csv -Path $outFile -NoTypeInformation
+        $Result | Select Title, URL, Owner, LastContentModifiedDate, StorageUsageCurrent | Export-Csv -Path $outFile -NoTypeInformation
     } Else {
-        $Result | Select Title, URL, Owner, LastContentModifiedDate, StorageUsage
+        $Result | Select Title, URL, Owner, LastContentModifiedDate, StorageUsageCurrent
     }
 }
 
