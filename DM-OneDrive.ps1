@@ -19,7 +19,7 @@ function Get-DMOneDriveSites ($tenant, $outFile) {
     If ($OutFile -ne $Null) {
         $Result | Select Title, URL, Owner, LastContentModifiedDate, StorageUsageCurrent | Export-Csv -Path $outFile -NoTypeInformation
     } Else {
-        $Result | Select Title, URL, LastContentModifiedDate, @{L=’StorageUsageCurrentMB’;E={$_.StorageUsageCurrent}}
+        $Result | Select Title, URL, LastContentModifiedDate, @{L='StorageUsageCurrent(MB)';E={$_.StorageUsageCurrent}}
     }
 }
 
