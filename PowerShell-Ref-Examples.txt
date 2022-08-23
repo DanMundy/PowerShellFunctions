@@ -1,2 +1,8 @@
-Best example of conditional parameter checking:
-Get-DMSmbSharePaths in FM-Filesystem.ps1
+Conditional parameter checking:
+	Get-DMSmbSharePaths in FM-Filesystem.ps1
+
+Using "-scope" as function parameter,
+to give option of eg installing module only for current user,
+but with default of installing module for the system:
+
+	Install-DM-Module

@@ -3,9 +3,11 @@
 
 ## ----------------------------------------------------------------------------
 
-# Function:
-# Purpose:
+# Function: Get-DMOneDriveSites
+# Purpose:  Show OneDrive sites
+# Requires: Install-DM-Module -Name PnP.PowerShell
 # Usage: Get-DMOneDriveSites --tenant "companyname" --outFile "C:\DM\Results.csv"
+# Get-DMOneDriveSites --tenant "companyname" | Export-Csv -Path $outFile -NoTypeInformation
 # 
 # (if eg SharePoint URL is "https://companyname.sharepoint.com" then Tenant is "companyname")
 
@@ -13,9 +15,9 @@ function Get-DMOneDriveSites ($tenant, $outFile) {
     if($azureConnection.Account -eq $null){ $global:azureConnection = Connect-AzureAD } # Connect to AAD
      
     #Get OneDrive Site Details and export to CSV
-    Get-PnPTenantSite -IncludeOneDriveSites -Filter "Url -like 'https://$tenant-my.sharepoint.com/personal/'" |
-        Select Title, URL, Owner, LastContentModifiedDate, StorageUsage | 
-            Export-Csv -Path $outFile -NoTypeInformation
+    $Result = Get-PnPTenantSite -IncludeOneDriveSites -Filter "Url -like 'https://$tenant-my.sharepoint.com/personal/'" |
+        Select Title, URL, Owner, LastContentModifiedDate, StorageUsage
+    Return $Result
 }
 
 ## ----------------------------------------------------------------------------
@@ -48,3 +50,23 @@ function New-DM-OneDrivePreprovision {
 }
 
 ## ----------------------------------------------------------------------------
+
+Function Get-DMSmbSharePaths {
+    
+    param (
+        $ComputerName,
+        $OutFile
+    )
+
+    $WMIParams = @{}
+
+    If ($ComputerName) { $WMIParams.Add('ComputerName',$ComputerName)}
+
+    $Shares = Get-WmiObject -class win32_share @WMIParams
+
+    If ($OutFile -ne $Null) {
+        $Shares | Select __Server,Name,Path,Description | Export-Csv -NoTypeInformation -Path "$OutFile" -Append
+    } Else {
+        $Shares | Select __Server,Name,Path,Description
+    }
+}
