@@ -24,7 +24,7 @@ function Install-DM-Module ($Name,$CurrentUser) {
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 # For older version of Windows (only affects current PowerShell session)
     if ($CurrentUser -eq $True) { $Scope = "CurrentUser"} Else { $Scope = "AllUsers"}
     if (Get-Module $Name -ListAvailable) {
-        Update-Module $Name -Scope $Scope -Force
+        Update-Module $Name -Force
     } Else {
         Install-Module $Name -Scope $Scope -Force
     }
