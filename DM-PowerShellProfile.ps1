@@ -22,5 +22,8 @@ function Reload-DMPowerShellProfile {
 }
 
 function Get-DMCommand {
-    Get-Command *-DM* | Format-Table @{L='DM Functions Currently Loaded:';E={$_.Name}}
+    Write-Host "Functions that have been loaded:"
+    Get-Command *-DM* | Format-Table Name -HideTableHeaders
+    Write-Host "Available for loading:"
+    Get-Item "C:\DM\PowerShellFunctions-main\DM*.ps1" | Format-Table Name -HideTableHeaders
 }
