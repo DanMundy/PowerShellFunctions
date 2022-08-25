@@ -22,11 +22,11 @@ function Reload-DMPowerShellProfile {
 }
 
 function Get-DMCommand {
-    Write-Host "Functions that have been loaded:"
-    Get-Command *-DM* | Format-Table Name -HideTableHeaders
-    Write-Host "Available for loading:"
+    Write-Host "DM Functions available for loading:"
     Get-Item "C:\DM\PowerShellFunctions-main\DM*.ps1" | Format-Table Name -HideTableHeaders
     Write-Host "Import with (eg): Import-DMFunctions -Name Active-Directory"
+    Write-Host "DM Functions that have been loaded:"
+    Get-Command *-DM* | Format-Table Name -HideTableHeaders
 }
 
 function Import-DMFunctions ($Name) {
