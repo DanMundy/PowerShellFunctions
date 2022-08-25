@@ -48,12 +48,19 @@ function Import-DMFunctions ($Name) {
     Get-DMCommand
 }
 
-function prompt  
-{  
-    $ESC = [char]27
-    "$ESC[46mPS $($executionContext.SessionState.Path.CurrentLocation)$('>' * ($nestedPromptLevel + 1)) $ESC[0m"  
+# ---------- PROMPT ----------
+
+function Prompt
+{
+    $promptString = "PS " + $(Get-Location) + ">"
+    Write-Host $promptString -NoNewline -ForegroundColor Yellow
+    return " "
 }
+# ---------- WINDOW TITLE ----------
 
 $Host.UI.RawUI.WindowTitle = "PowerShell"
+
+# ---------- GO TO MY DIR ----------
+
 cd C:\DM
 Get-DMCommand
