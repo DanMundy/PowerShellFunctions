@@ -29,7 +29,6 @@ function Get-DMCommand {
     Write-Host "DM Functions that have been loaded:"
     Write-Host "----------"
     Get-Command *-DM* | Format-Table Name -HideTableHeaders
-    Write-Host "----------"
 }
 
 function Import-DMFunctions ($Name) {
