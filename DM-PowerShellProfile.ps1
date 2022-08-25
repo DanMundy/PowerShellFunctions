@@ -47,3 +47,13 @@ function Import-DMFunctions ($Name) {
     If ($Name -eq "WindowsUpdates") { . $Folder\DM-WindowsUpdates.ps1 }
     Get-DMCommand
 }
+
+function prompt  
+{  
+    $ESC = [char]27
+    "$ESC[46mPS $($executionContext.SessionState.Path.CurrentLocation)$('>' * ($nestedPromptLevel + 1)) $ESC[0m"  
+}
+
+$Host.UI.RawUI.WindowTitle = "PowerShell"
+cd C:\DM
+Get-DMCommand
