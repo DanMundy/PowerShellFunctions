@@ -5,4 +5,4 @@ Using "-scope" as function parameter,
 to give option of eg installing module only for current user,
 but with default of installing module for the system:
 
-	Install-DM-Module
+	Install-DMModule

@@ -16,12 +16,12 @@ Function Get-DMVBRLastTapeWritten {
 
 ## ----------------------------------------------------------------------------
 
-# Function: Move-DM-ExpiredTapesToFreePool
+# Function: Move-DMExpiredTapesToFreePool
 # Purpose:  Move any expired tapes to the free media pool
 # (req because otherwise Veeam won't use (eg) a free tape that was previously marked as daily, if the next backup would be marked as weekly.
 # I believe this behaviour is expected to change in a future version of Veeam, and this workaround would no longer be required) 
-# Usage: Move-DM-ExpiredTapesToFreePool
-function Move-DM-ExpiredTapesToFreePool {
+# Usage: Move-DMExpiredTapesToFreePool
+function Move-DMExpiredTapesToFreePool {
     Add-PSSnapin VeeamPSSnapin
     $UnrecognizedMediaPool = Get-VBRTapeMediaPool -name "Unrecognized"
     $FreeMediaPool = Get-VBRTapeMediaPool -name "Free"

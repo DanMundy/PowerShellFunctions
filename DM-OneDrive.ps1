@@ -5,7 +5,7 @@
 
 # Function: Get-DMOneDriveSites
 # Purpose:  Show OneDrive sites
-# Requires: Install-DM-Module -Name PnP.PowerShell
+# Requires: Install-DMModule -Name PnP.PowerShell
 # Usage: Get-DMOneDriveSites --tenant "mundy" --outFile "C:\DM\Results.csv"
 #        Get-DMOneDriveSites -tenant "mundy" | sort UsageInMB -Descending
 # 
@@ -13,7 +13,7 @@
 # Todo: Parameter checking, to make sure it's just a single word, no "https://" included (as I'm always mistyping it)
 
 function Get-DMOneDriveSites ($tenant, $outFile) { 
-    if ($(get-pnpcontext).url -ne "https://$tenant.sharepoint.com") { Connect-DM-SPSite -Url "https://$tenant.sharepoint.com" }
+    if ($(get-pnpcontext).url -ne "https://$tenant.sharepoint.com") { Connect-DMSPSite -Url "https://$tenant.sharepoint.com" }
     #if($azureConnection.Account -eq $null){ $global:azureConnection = Connect-AzureAD } # Connect to AAD
      
     #Get OneDrive Site Details and export to CSV
@@ -25,11 +25,11 @@ function Get-DMOneDriveSites ($tenant, $outFile) {
     }
 }
 
-# Usage:   Get-DM-OneDriveSitesFileCount -SiteURL "https://purewineco-my.sharepoint.com/personal/stanley_tan_purewine_co"
+# Usage:   Get-DMOneDriveSitesFileCount -SiteURL "https://purewineco-my.sharepoint.com/personal/stanley_tan_purewine_co"
 # Sources: https://dm.wtf/RFGK https://dm.wtf/XIHN
 # Todo:    Combine it with the above, so it scans *all* OneDrives, and shows both usage in MB, and number of files
 
-function Get-DM-OneDriveSitesFileCount ($SiteURL) {
+function Get-DMOneDriveSitesFileCount ($SiteURL) {
     $ListName = "Documents"
 
     Connect-PnPOnline $SiteURL -Interactive
@@ -43,11 +43,11 @@ function Get-DM-OneDriveSitesFileCount ($SiteURL) {
 ## ----------------------------------------------------------------------------
 
 # DRAFT:    THIS FUNCTION HASN'T BEEN TESTED YET
-# Function: New-DM-OneDrivePreprovision
+# Function: New-DMOneDrivePreprovision
 # Purpose:  Create OneDrive for users who don't have one, so that migration won't fail
-# Usage:    New-DM-OneDrivePreprovision
+# Usage:    New-DMOneDrivePreprovision
 
-function New-DM-OneDrivePreprovision {
+function New-DMOneDrivePreprovision {
     #Set SPO service url
     $SPOServiceUrl = "https://mundy-admin.sharepoint.com"
      
@@ -91,12 +91,12 @@ Function Get-DMSmbSharePaths {
 
 ## ----------------------------------------------------------------------------
 
-# Function: Grant-DM-AdminAccessToAllOneDriveSites
+# Function: Grant-DMAdminAccessToAllOneDriveSites
 # Purpose:  
-# Requires: Install-DM-Module -Name PnP.PowerShell 
-# Usage: Grant-DM-AdminAccessToAllOneDriveSites -AdminSiteURL "https://crescent-admin.sharepoint.com" -SiteCollAdmin "sarazhak@crescent.com"
+# Requires: Install-DMModule -Name PnP.PowerShell 
+# Usage: Grant-DMAdminAccessToAllOneDriveSites -AdminSiteURL "https://crescent-admin.sharepoint.com" -SiteCollAdmin "sarazhak@crescent.com"
 
-Function Grant-DM-AdminAccessToAllOneDriveSites ($AdminSiteURL,$SiteCollAdmin) {
+Function Grant-DMAdminAccessToAllOneDriveSites ($AdminSiteURL,$SiteCollAdmin) {
       
     #Connect to PnP Online to the Tenant Admin Site
     Connect-PnPOnline -Url $AdminSiteURL -Interactive

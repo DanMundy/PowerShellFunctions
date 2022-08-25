@@ -3,9 +3,9 @@
 
 ## ----------------------------------------------------------------------------
 
-# Function:     Get-DM-LastBootTime
+# Function:     Get-DMLastBootTime
 # Purpose:      Show when Windows was booted
-# Usage:        Get-DM-LastBootTime
+# Usage:        Get-DMLastBootTime
 
 function Get-DMLastBootTime {
     Get-WmiObject win32_operatingsystem | select csname, @{LABEL='LastBootUpTime';EXPRESSION={$_.ConverttoDateTime($_.lastbootuptime)}}
@@ -17,22 +17,22 @@ function Get-DMRebootHistory {
 
 ## ----------------------------------------------------------------------------
 
-# Function:     Get-DM-InstalledPrograms
+# Function:     Get-DMInstalledPrograms
 # Purpose:      Show applications installed
-# Usage:        Get-DM-InstalledPrograms
+# Usage:        Get-DMInstalledPrograms
 
-function Get-DM-InstalledPrograms {
+function Get-DMInstalledPrograms {
     Get-WmiObject -Class Win32_Product | ft Name,Vendor,Version
 }
 
 ## ----------------------------------------------------------------------------
 
-# Function: Get-DM-InstallFeatureUpdate
+# Function: Get-DMInstallFeatureUpdate
 # Purpose:  
-# Usage:    Get-DM-LastBootTime
+# Usage:    Get-DMLastBootTime
 # Sources:  https://dm.wtf/IXTU
 
-function Install-DM-WindowsFeatureUpdate {
+function Install-DMWindowsFeatureUpdate {
     $winVer = [System.Environment]::OSVersion.Version.Major
     $dir = 'C:\_Windows_FU\packages'
     mkdir $dir
@@ -59,11 +59,11 @@ function Install-DM-WindowsFeatureUpdate {
 
 ## ----------------------------------------------------------------------------
 
-# Function:     New-DM-Shortcut
+# Function:     New-DMShortcut
 # Purpose:      Creates a shortcut (LNK file)
-# Usage:        New-DM-Shortcut
+# Usage:        New-DMShortcut
 
-function New-DM-Shortcut ($TargetFile,$ShortcutFile) {
+function New-DMShortcut ($TargetFile,$ShortcutFile) {
     $WScriptShell = New-Object -ComObject WScript.Shell
     $Shortcut = $WScriptShell.CreateShortcut($ShortcutFile)
     $Shortcut.TargetPath = $TargetFile
@@ -72,42 +72,42 @@ function New-DM-Shortcut ($TargetFile,$ShortcutFile) {
 
 ## ----------------------------------------------------------------------------
 
-# Function:     New-DM-OfficeShortcuts
+# Function:     New-DMOfficeShortcuts
 # Purpose:      Creates desktop shortcuts for the Office Apps
-# Usage:        New-DM-OfficeShortcuts -LogFile "C:\Temp\New-Object-Desktop-Shortcuts.log"
-# Depends on:   New-DM-Shortcut (in this file)
+# Usage:        New-DMOfficeShortcuts -LogFile "C:\Temp\New-Object-Desktop-Shortcuts.log"
+# Depends on:   New-DMShortcut (in this file)
 
-function New-DM-OfficeShortcuts ($LogFile) {
+function New-DMOfficeShortcuts ($LogFile) {
     #Start logging PS script for troubleshooting.
     Start-Transcript -Path $LogFile
 
     #Create Microsoft Office public deskop shortcuts.
-    New-DM-Shortcut -TargetFile "C:\Program Files\Microsoft Office\root\Office16\MSACCESS.EXE" -ShortcutFile "C:\Users\Public\Desktop\Access.lnk"
-    New-DM-Shortcut -TargetFile "C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE" -ShortcutFile "C:\Users\Public\Desktop\Excel.lnk"
-    New-DM-Shortcut -TargetFile "C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE" -ShortcutFile "C:\Users\Public\Desktop\Outlook.lnk"
-    New-DM-Shortcut -TargetFile "C:\Program Files\Microsoft Office\root\Office16\POWERPNT.EXE" -ShortcutFile "C:\Users\Public\Desktop\PowerPoint.lnk"
-    New-DM-Shortcut -TargetFile "C:\Program Files\Microsoft Office\root\Office16\MSPUB.EXE" -ShortcutFile "C:\Users\Public\Desktop\Publisher.lnk"
-    New-DM-Shortcut -TargetFile "C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE" -ShortcutFile "C:\Users\Public\Desktop\Word.lnk"
+    New-DMShortcut -TargetFile "C:\Program Files\Microsoft Office\root\Office16\MSACCESS.EXE" -ShortcutFile "C:\Users\Public\Desktop\Access.lnk"
+    New-DMShortcut -TargetFile "C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE" -ShortcutFile "C:\Users\Public\Desktop\Excel.lnk"
+    New-DMShortcut -TargetFile "C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE" -ShortcutFile "C:\Users\Public\Desktop\Outlook.lnk"
+    New-DMShortcut -TargetFile "C:\Program Files\Microsoft Office\root\Office16\POWERPNT.EXE" -ShortcutFile "C:\Users\Public\Desktop\PowerPoint.lnk"
+    New-DMShortcut -TargetFile "C:\Program Files\Microsoft Office\root\Office16\MSPUB.EXE" -ShortcutFile "C:\Users\Public\Desktop\Publisher.lnk"
+    New-DMShortcut -TargetFile "C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE" -ShortcutFile "C:\Users\Public\Desktop\Word.lnk"
 
     #Create Microsoft Internet Exporer public desktop shortcut.
-    #New-DM-Shortcut -TargetFile "C:\Program Files\Internet Explorer\iexplore.exe" -ShortcutFile "C:\Users\Public\Desktop\Internet Explorer.lnk"
+    #New-DMShortcut -TargetFile "C:\Program Files\Internet Explorer\iexplore.exe" -ShortcutFile "C:\Users\Public\Desktop\Internet Explorer.lnk"
 
     #Create Google Chrome desktop shortcut.
-    #New-DM-Shortcut -TargetFile "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" -ShortcutFile "C:\Users\Public\Desktop\Google Chrome.lnk"
+    #New-DMShortcut -TargetFile "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" -ShortcutFile "C:\Users\Public\Desktop\Google Chrome.lnk"
 
     #Stop logging PS script for troubleshooting.
     Stop-Transcript
 }
-# New-DM-OfficeShortcuts -LogFile "$env:Temp\New-Object-Desktop-Shortcuts.log"
+# New-DMOfficeShortcuts -LogFile "$env:Temp\New-Object-Desktop-Shortcuts.log"
 
 
 ## ----------------------------------------------------------------------------
 
-# Function:     New-DM-Shortcut
+# Function:     New-DMShortcut
 # Purpose:      Creates a shortcut (LNK file)
-# Usage:        New-DM-Shortcut
+# Usage:        New-DMShortcut
 
-function Set-DM-HostnameBasedOnSerial ($Prefix) {
+function Set-DMHostnameBasedOnSerial ($Prefix) {
     $AssetID = ((Get-WmiObject Cim_Chassis).SerialNumber).replace("-", "").replace(".", "")
     $Name = "$Prefix-" + $AssetID.substring($assetid.length - 11, 11)
 

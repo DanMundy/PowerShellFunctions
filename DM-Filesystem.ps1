@@ -3,16 +3,16 @@
 # List of functions included in this file:
 #     Get-DMUsersWithHomeDrive
 #     Get-DMSmbSharePaths
-#     Get-DM-DirectoryUsage
+#     Get-DMDirectoryUsage
 #     Get-DMFilesOlderThan and Get-DMFilesModifiedWithin
 
 ## ----------------------------------------------------------------------------
 
 # Function: Get-DMUsersWithHomeDrive
 # Purpose:  For list of folders, get the folder size, and number of items:
-# Usage:    Get-DM-FolderSizeAndItems -inFile ListOfFoldersToScan.txt -outFile "C:\DM\Results.csv"
+# Usage:    Get-DMFolderSizeAndItems -inFile ListOfFoldersToScan.txt -outFile "C:\DM\Results.csv"
 
-Function Get-DM-FolderSizeAndItems {
+Function Get-DMFolderSizeAndItems {
     [CmdletBinding()]
     param(
         [parameter(Position=0,Mandatory=$true)]
@@ -72,12 +72,12 @@ Function Get-DMSmbSharePaths {
 
 ## ----------------------------------------------------------------------------
 
-# Function: Get-DM-DirectoryUsage
+# Function: Get-DMDirectoryUsage
 # Purpose: Show size of subdirectories, 1 level deep
 #          (like Linux's 'du --max-depth=1')
-# Usage: Get-DM-DirectoryUsage C:\ClusterStorage\CSV01
-#        Get-DM-DirectoryUsage C:\ClusterStorage\CSV01\Servers
-Function Get-DM-DirectoryUsage ($startFolder) {
+# Usage: Get-DMDirectoryUsage C:\ClusterStorage\CSV01
+#        Get-DMDirectoryUsage C:\ClusterStorage\CSV01\Servers
+Function Get-DMDirectoryUsage ($startFolder) {
     $colItems = Get-ChildItem $startFolder | Where-Object {$_.PSIsContainer -eq $true} | Sort-Object
     foreach ($i in $colItems)
     {

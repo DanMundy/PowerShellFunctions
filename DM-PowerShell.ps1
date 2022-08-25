@@ -3,11 +3,11 @@
 
 ## ----------------------------------------------------------------------------
 
-# Function: Get-DM-PowerShellFunctions
+# Function: Install-DMPowerShellFunctions
 # Purpose:  Download and unzip my PowerShell functions
-# Usage:    Get-DM-PowerShellFunctionsGet-DM-PowerShellFunctions
+# Usage:    Install-DMPowerShellFunctionsInstall-DMPowerShellFunctions
 
-function Get-DM-PowerShellFunctions {
+function Install-DMPowerShellFunctions {
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     wget https://dm.wtf/psf -outFile dm.zip
     Expand-Archive .\dm.zip . -Force
@@ -15,12 +15,12 @@ function Get-DM-PowerShellFunctions {
 
 ## ----------------------------------------------------------------------------
 
-# Function: Install-DM-Module
+# Function: Install-DMModule
 # Purpose:  Update (or Install) PowerShell Module
-# Usage:    Install-DM-Module -Name ModuleName (install for all users)
-#           Install-DM-Module -Name ModuleName -CurrentUser $true (install for current user)
+# Usage:    Install-DMModule -Name ModuleName (install for all users)
+#           Install-DMModule -Name ModuleName -CurrentUser $true (install for current user)
 
-function Install-DM-Module ($Name,$CurrentUser) {
+function Install-DMModule ($Name,$CurrentUser) {
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 # For older version of Windows (only affects current PowerShell session)
     if ($CurrentUser -eq $True) { $Scope = "CurrentUser"} Else { $Scope = "AllUsers"}
     if (Get-Module $Name -ListAvailable) {
@@ -40,6 +40,6 @@ function Install-DM-Module ($Name,$CurrentUser) {
 #
 # Save-Module -Name PSWindowsUpdate –Path \\lon-fs02\psmodules\
 
-Function Get-DM-PowerShellVersion {
+Function Get-DMPowerShellVersion {
     Return $PSVersionTable.PSVersion
 }

@@ -7,7 +7,7 @@
 # Purpose:  List all users with a home drive, output to CSV
 # Usage:    Get-DMUsersWithHomeDrive -outFile "C:\DM\Results.csv"
 
-# function Get-DM-ADUsersWithHomeDrive ($outFile) {
+# function Get-DMADUsersWithHomeDrive ($outFile) {
 #     Import-Module ActiveDirectory
 #     Get-ADUser -Filter 'HomeDrive -ne "$Null"' `
 #     -Property Name,CanonicalName,CN,DisplayName,DistinguishedName,HomeDirectory,HomeDrive,SamAccountName,UserPrincipalName `
@@ -16,7 +16,7 @@
 
 ## ----------------------------------------------------------------------------
 
-function Get-DM-ADUsersWithLogonScriptOrHomeDrive ($outFile) {
+function Get-DMADUsersWithLogonScriptOrHomeDrive ($outFile) {
     Import-Module ActiveDirectory
     Get-ADUser -Filter 'HomeDrive -ne "$Null" -or ScriptPath -ne "$Null"' `
     -Property Name,CanonicalName,CN,DisplayName,DistinguishedName,HomeDirectory,HomeDrive,ScriptPath,SamAccountName,UserPrincipalName `

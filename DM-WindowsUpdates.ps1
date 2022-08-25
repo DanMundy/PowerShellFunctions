@@ -3,12 +3,12 @@
 
 ## ----------------------------------------------------------------------------
 
-# Function: Get-DM-InstallFeatureUpdate
+# Function: Get-DMInstallFeatureUpdate
 # Purpose:  
-# Usage:    Get-DM-LastBootTime
+# Usage:    Get-DMLastBootTime
 # Sources:  https://dm.wtf/IXTU
 
-function Install-DM-WindowsFeatureUpdate {
+function Install-DMWindowsFeatureUpdate {
     $winVer = [System.Environment]::OSVersion.Version.Major
     $dir = 'C:\_Windows_FU\packages'
     mkdir $dir
@@ -35,12 +35,12 @@ function Install-DM-WindowsFeatureUpdate {
 
 ## ----------------------------------------------------------------------------
 
-# Function: Install-DM-WindowsUpdates
+# Function: Install-DMWindowsUpdates
 # Purpose:  Silently install all available updates, no reboot
-# Usage:    Install-DM-WindowsUpdates
+# Usage:    Install-DMWindowsUpdates
 # More info on PSWindowsUpdate: https://dm.wtf/BMZH
 
-function Install-DM-WindowsUpdates {
+function Install-DMWindowsUpdates {
     if(-not (Get-Module PSWindowsUpdate -ListAvailable)){
     Install-Module PSWindowsUpdate -Scope CurrentUser -Force
     }

@@ -3,11 +3,11 @@
 
 ## ----------------------------------------------------------------------------
 
-# Function:     Start-DM-IPScan
+# Function:     Start-DMIPScan
 # Purpose:      Scan current /24 network
-# Usage:        Start-DM-IPScan
+# Usage:        Start-DMIPScan
 
-function Start-DM-IPScan {
+function Start-DMIPScan {
     #Foreach all Class C:-Networks (/24)
     $(Get-NetIPAddress | where-object {$_.PrefixLength -eq "24"}).IPAddress | Where-Object {$_ -like "*.*"} | % { 
         $netip="$($([IPAddress]$_).GetAddressBytes()[0]).$($([IPAddress]$_).GetAddressBytes()[1]).$($([IPAddress]$_).GetAddressBytes()[2])"

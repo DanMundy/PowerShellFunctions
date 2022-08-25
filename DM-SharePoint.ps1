@@ -3,13 +3,13 @@
 
 ## ----------------------------------------------------------------------------
 
-# Function: Connect-DM-SPSite
+# Function: Connect-DMSPSite
 # Purpose:  Uses PnP PowerShell to connect to a given URL
 # Usage: (eg)
-# Connect-DM-SPSite -Url https://companyname.sharepoint.com
-# Connect-DM-SPSite -Url https://companyname.sharepoint.com/sites/Sitename
+# Connect-DMSPSite -Url https://companyname.sharepoint.com
+# Connect-DMSPSite -Url https://companyname.sharepoint.com/sites/Sitename
 
-function Connect-DM-SPSite {
+function Connect-DMSPSite {
     [CmdletBinding()]
     param (
         $url
@@ -37,8 +37,8 @@ function Connect-DM-SPSite {
 
 # Function:
 # Purpose:
-# Usage: Get-DM-AzureADGroupMember -GroupName "SP-S-SITENAME-DL-LIBRARYNAME-P-CONTRIB"
-function Get-DM-AzureADGroupMember ($GroupName) {
+# Usage: Get-DMAzureADGroupMember -GroupName "SP-S-SITENAME-DL-LIBRARYNAME-P-CONTRIB"
+function Get-DMAzureADGroupMember ($GroupName) {
     if($azureConnection.Account -eq $null){ $global:azureConnection = Connect-AzureAD } # Connect to AAD
     $GroupID = (Get-AzureADGroup -Filter "DisplayName eq '$GroupName'").ObjectId
     Get-AzureADGroupMember -ObjectId $GroupId
@@ -48,8 +48,8 @@ function Get-DM-AzureADGroupMember ($GroupName) {
 
 # Function:
 # Purpose: 
-# Usage: Add-DM-AzureADGroupMember -GroupName "SP-S-SITENAME-DL-LIBRARYNAME-P-CONTRIB" -UserUPN "user@mundy.co"
-function Add-DM-AzureADGroupMember ($GroupName, $UserUPN) {
+# Usage: Add-DMAzureADGroupMember -GroupName "SP-S-SITENAME-DL-LIBRARYNAME-P-CONTRIB" -UserUPN "user@mundy.co"
+function Add-DMAzureADGroupMember ($GroupName, $UserUPN) {
     if($azureConnection.Account -eq $null){ $global:azureConnection = Connect-AzureAD } # Connect to AAD
     $GroupID = (Get-AzureADGroup -Filter "DisplayName eq '$GroupName'").ObjectId
     $UserID = (Get-AzureADUser -Filter "UserPrincipalName eq '$UserUPN'").ObjectId
@@ -60,8 +60,8 @@ function Add-DM-AzureADGroupMember ($GroupName, $UserUPN) {
 
 # Function:
 # Purpose:
-# Usage: Remove-DM-AzureADGroupMember
-function Remove-DM-AzureADGroupMember ($GroupName, $UserUPN) {
+# Usage: Remove-DMAzureADGroupMember
+function Remove-DMAzureADGroupMember ($GroupName, $UserUPN) {
     if($azureConnection.Account -eq $null){ $global:azureConnection = Connect-AzureAD } # Connect to AAD
     $GroupID = (Get-AzureADGroup -Filter "DisplayName eq '$GroupName'").ObjectId
     $UserID = (Get-AzureADUser -Filter "UserPrincipalName eq '$UserUPN'").ObjectId
@@ -72,8 +72,8 @@ function Remove-DM-AzureADGroupMember ($GroupName, $UserUPN) {
 
 # Function:
 # Purpose:
-# Usage: Reset-DM-AzureADGroupMember -GroupName "SP-S-SITENAME-DL-LIBRARYNAME-P-CONTRIB"
-function Reset-DM-AzureADGroupMember ($GroupName) {
+# Usage: Reset-DMAzureADGroupMember -GroupName "SP-S-SITENAME-DL-LIBRARYNAME-P-CONTRIB"
+function Reset-DMAzureADGroupMember ($GroupName) {
     if($azureConnection.Account -eq $null){ $global:azureConnection = Connect-AzureAD } # Connect to AAD
     $GroupID = (Get-AzureADGroup -Filter "DisplayName eq '$GroupName'").ObjectId
     $users=Get-AzureADGroupMember -ObjectId $GroupId -All $true |where {$_.ObjectType -eq 'User'}
@@ -91,10 +91,10 @@ function Reset-DM-AzureADGroupMember ($GroupName) {
 ## ----------------------------------------------------------------------------
 
 # !!! Check this - it looks the same as Team site function?? May have pasted the wrong thing?
-# Function: New-DM-SPCommSite
+# Function: New-DMSPCommSite
 # Purpose:  Create Communication Site
-# Usage:    New-DM-SPCommSite -SiteName "SITENAME"  -SiteURL "https://mundy.sharepoint.com/sites/SITENAME" -AdminCenterURL "https://mundy-Admin.sharepoint.com" -SiteOwner "admin@mundy.onmicrosoft.com" -Timezone 19 -Template "STS#3"
-#Function New-DM-SPCommSite ($AdminCenterURL, $SiteURL, $SiteName, $SiteOwner, $Template, $Timezone) { 
+# Usage:    New-DMSPCommSite -SiteName "SITENAME"  -SiteURL "https://mundy.sharepoint.com/sites/SITENAME" -AdminCenterURL "https://mundy-Admin.sharepoint.com" -SiteOwner "admin@mundy.onmicrosoft.com" -Timezone 19 -Template "STS#3"
+#Function New-DMSPCommSite ($AdminCenterURL, $SiteURL, $SiteName, $SiteOwner, $Template, $Timezone) { 
 #  Try
 #  {
 #      #Connect to Tenant Admin
@@ -122,10 +122,10 @@ function Reset-DM-AzureADGroupMember ($GroupName) {
 ## ----------------------------------------------------------------------------
 
 
-# Function: New-DM-SPSite
+# Function: New-DMSPSite
 # Purpose:  Create Team Site
-# Usage:    New-DM-SPSite -SiteName "SITENAME"  -SiteURL "https://mundy.sharepoint.com/sites/SITENAME" -AdminCenterURL "https://mundy-Admin.sharepoint.com" -SiteOwner "admin@mundy.onmicrosoft.com" -Timezone 19 -Template "STS#3"
-Function New-DM-SPSite ($AdminCenterURL, $SiteURL, $SiteName, $SiteOwner, $Template, $Timezone) {
+# Usage:    New-DMSPSite -SiteName "SITENAME"  -SiteURL "https://mundy.sharepoint.com/sites/SITENAME" -AdminCenterURL "https://mundy-Admin.sharepoint.com" -SiteOwner "admin@mundy.onmicrosoft.com" -Timezone 19 -Template "STS#3"
+Function New-DMSPSite ($AdminCenterURL, $SiteURL, $SiteName, $SiteOwner, $Template, $Timezone) {
   Try
   {
       #Connect to Tenant Admin
@@ -193,8 +193,8 @@ Function Set-DMSPSitePermission ($SiteURL, $UserID, $GroupName, $PermissionLevel
 
 # Function: 
 # Purpose:  Create Document Library
-# Usage:    New-DM-SPDocumentLibrary -SiteURL "https://mundy.sharepoint.com/sites/SITENAME" -LibraryName "LIBRARYNAME"
-Function New-DM-SPDocumentLibrary($SiteURL, $LibraryName)
+# Usage:    New-DMSPDocumentLibrary -SiteURL "https://mundy.sharepoint.com/sites/SITENAME" -LibraryName "LIBRARYNAME"
+Function New-DMSPDocumentLibrary($SiteURL, $LibraryName)
 { 
   Try
   {
@@ -236,37 +236,37 @@ Function New-DM-SPDocumentLibrary($SiteURL, $LibraryName)
 # 1 (Todo) = Create the comms site
 #
 # 2 = Create the Team site(s)
-# New-DM-SPSite -SiteName "SITENAME"  -SiteURL "https://mundy.sharepoint.com/sites/SITENAME" -AdminCenterURL "https://mundy-Admin.sharepoint.com" -SiteOwner "admin@mundy.onmicrosoft.com" -Timezone 19 -Template "STS#3"
-# New-DM-SPSite -SiteName "SITENAME2"  -SiteURL "https://mundy.sharepoint.com/sites/SITENAME2" -AdminCenterURL "https://mundy-Admin.sharepoint.com" -SiteOwner "admin@mundy.onmicrosoft.com" -Timezone 19 -Template "STS#3"
+# New-DMSPSite -SiteName "SITENAME"  -SiteURL "https://mundy.sharepoint.com/sites/SITENAME" -AdminCenterURL "https://mundy-Admin.sharepoint.com" -SiteOwner "admin@mundy.onmicrosoft.com" -Timezone 19 -Template "STS#3"
+# New-DMSPSite -SiteName "SITENAME2"  -SiteURL "https://mundy.sharepoint.com/sites/SITENAME2" -AdminCenterURL "https://mundy-Admin.sharepoint.com" -SiteOwner "admin@mundy.onmicrosoft.com" -Timezone 19 -Template "STS#3"
 # (wait 5 minutes)
 #
 # 3 = Create AAD security groups for Team Sites
-# New-DM-SPGroupsForSite -SiteName "SITENAME" -GroupOwner "admin@mundy.onmicrosoft.com"
-# New-DM-SPGroupsForSite -SiteName "SITENAME2" -GroupOwner "admin@mundy.onmicrosoft.com"
+# New-DMSPGroupsForSite -SiteName "SITENAME" -GroupOwner "admin@mundy.onmicrosoft.com"
+# New-DMSPGroupsForSite -SiteName "SITENAME2" -GroupOwner "admin@mundy.onmicrosoft.com"
 #
 # 4 = Purpose: Create AAD security groups for Document Library
-# New-DM-SPGroupsForDL -SiteName "SITENAME" -LibraryName "Sales" -GroupOwner "admin@mundy.onmicrosoft.com"
-# New-DM-SPGroupsForDL -SiteName "SITENAME2" -LibraryName "Finance" -GroupOwner "admin@mundy.onmicrosoft.com"
+# New-DMSPGroupsForDL -SiteName "SITENAME" -LibraryName "Sales" -GroupOwner "admin@mundy.onmicrosoft.com"
+# New-DMSPGroupsForDL -SiteName "SITENAME2" -LibraryName "Finance" -GroupOwner "admin@mundy.onmicrosoft.com"
 # (wait 5 minutes)
 #
 # 5 = Create DL in Team Site
 # Usage (note: Wait 5 minutes after creating the AAD groups, or this function may fail)
-# Usage: New-DM-SPDocumentLibrary -SiteURL "https://mundy.sharepoint.com/sites/SITENAME" -LibraryName "Sales"
-# Usage: New-DM-SPDocumentLibrary -SiteURL "https://mundy.sharepoint.com/sites/SITENAME2" -LibraryName "Finance"
+# Usage: New-DMSPDocumentLibrary -SiteURL "https://mundy.sharepoint.com/sites/SITENAME" -LibraryName "Sales"
+# Usage: New-DMSPDocumentLibrary -SiteURL "https://mundy.sharepoint.com/sites/SITENAME2" -LibraryName "Finance"
 # (wait 5 minutes)
 # 6 = For DLs, break permission inheritance, set new permissions
 # Usage (note: Wait 5 minutes after creating the DLs, or this function may fail)
-# Usage: Set-DM-SPDLPermissions -SiteURL "https://mundy.sharepoint.com/sites/SITENAME" -SiteName "SITENAME" -Library "Sales" -UserID "admin@mundy.onmicrosoft.com" -ReadGroupName "SP-S-SITENAME-DL-Sales-P-READ" -ContribGroupName "SP-S-SITENAME-DL-Sales-P-CONTRIB"
-# Usage: Set-DM-SPDLPermissions -SiteURL "https://mundy.sharepoint.com/sites/SITENAME2" -SiteName "SITENAME2" -Library "Finance" -UserID "admin@mundy.onmicrosoft.com" -ReadGroupName "SP-S-SITENAME2-DL-Finance-P-READ" -ContribGroupName "SP-S-SITENAME-DL-Finance-P-CONTRIB"
+# Usage: Set-DMSPDLPermissions -SiteURL "https://mundy.sharepoint.com/sites/SITENAME" -SiteName "SITENAME" -Library "Sales" -UserID "admin@mundy.onmicrosoft.com" -ReadGroupName "SP-S-SITENAME-DL-Sales-P-READ" -ContribGroupName "SP-S-SITENAME-DL-Sales-P-CONTRIB"
+# Usage: Set-DMSPDLPermissions -SiteURL "https://mundy.sharepoint.com/sites/SITENAME2" -SiteName "SITENAME2" -Library "Finance" -UserID "admin@mundy.onmicrosoft.com" -ReadGroupName "SP-S-SITENAME2-DL-Finance-P-READ" -ContribGroupName "SP-S-SITENAME-DL-Finance-P-CONTRIB"
 #
 # ------------------------------
 
 ## ----------------------------------------------------------------------------
 
-# Function: New-DM-SPGroupsForSite
+# Function: New-DMSPGroupsForSite
 # Purpose:  Create AAD security groups for Team Site
-# Usage:    New-DM-SPGroupsForSite -SiteName "SITENAME" -GroupOwner "admin@mundy.onmicrosoft.com"
-Function New-DM-SPGroupsForSite ($SiteName, $GroupOwner) {
+# Usage:    New-DMSPGroupsForSite -SiteName "SITENAME" -GroupOwner "admin@mundy.onmicrosoft.com"
+Function New-DMSPGroupsForSite ($SiteName, $GroupOwner) {
   if($azureConnection.Account -eq $null){ $global:azureConnection = Connect-AzureAD } # Connect to AAD
 
   $AADGroupOwner = (Get-AzureADUser -Filter "UserPrincipalName eq '$GroupOwner'")
@@ -293,10 +293,10 @@ Function New-DM-SPGroupsForSite ($SiteName, $GroupOwner) {
 ## ----------------------------------------------------------------------------
 
 
-# Function: New-DM-SPGroupsForDL
+# Function: New-DMSPGroupsForDL
 # Purpose:  Create AAD security groups for Document Library
-# Usage:    New-DM-SPGroupsForDL -SiteName "SITENAME" -LibraryName "LIBRARYNAME" -GroupOwner "admin@mundy.onmicrosoft.com"
-Function New-DM-SPGroupsForDL ($SiteName, $LibraryName, $GroupOwner) {
+# Usage:    New-DMSPGroupsForDL -SiteName "SITENAME" -LibraryName "LIBRARYNAME" -GroupOwner "admin@mundy.onmicrosoft.com"
+Function New-DMSPGroupsForDL ($SiteName, $LibraryName, $GroupOwner) {
   
   if($azureConnection.Account -eq $null){ $global:azureConnection = Connect-AzureAD } # Connect to AAD
 
@@ -323,10 +323,10 @@ Function New-DM-SPGroupsForDL ($SiteName, $LibraryName, $GroupOwner) {
 
 ## ----------------------------------------------------------------------------
 
-# Function: Set-DM-SPDLPermissions
+# Function: Set-DMSPDLPermissions
 # Purpose: Break inheritance and Set New Permissions on Document Library
-# Usage: Set-DM-SPDLPermissions -SiteURL "https://mundy.sharepoint.com/sites/SITENAME" -SiteName "SITENAME" -Library "LIBRARYNAME" -UserID "admin@mundy.onmicrosoft.com" -ReadGroupName "SP-S-SITENAME-DL-LIBRARYNAME-P-READ" -ContribGroupName "SP-S-SITENAME-DL-LIBRARYNAME-P-CONTRIB"
-Function Set-DM-SPDLPermissions ($SiteURL, $SiteName, $Library, $UserID, $ReadGroupName, $ContribGroupName,$OwnerGroupName)
+# Usage: Set-DMSPDLPermissions -SiteURL "https://mundy.sharepoint.com/sites/SITENAME" -SiteName "SITENAME" -Library "LIBRARYNAME" -UserID "admin@mundy.onmicrosoft.com" -ReadGroupName "SP-S-SITENAME-DL-LIBRARYNAME-P-READ" -ContribGroupName "SP-S-SITENAME-DL-LIBRARYNAME-P-CONTRIB"
+Function Set-DMSPDLPermissions ($SiteURL, $SiteName, $Library, $UserID, $ReadGroupName, $ContribGroupName,$OwnerGroupName)
 { 
   Try
   {
