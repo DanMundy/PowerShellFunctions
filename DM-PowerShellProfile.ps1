@@ -27,3 +27,19 @@ function Get-DMCommand {
     Write-Host "Available for loading:"
     Get-Item "C:\DM\PowerShellFunctions-main\DM*.ps1" | Format-Table Name -HideTableHeaders
 }
+
+function Import-DMFunctions ($Name) {
+    $Folder = "C:\DM\PowerShellFunctions-main"
+    If ($Name -eq "Active-Directory") { . $Folder\DM-Active-Directory.ps1 }
+    If ($Name -eq "Filesystem") { . $Folder\DM-Filesystem.ps1 }
+    If ($Name -eq "Hyper-V") { . $Folder\DM-Hyper-V.ps1 }
+    If ($Name -eq "Internet") { . $Folder\DM-Internet.ps1 }
+    If ($Name -eq "Network") { . $Folder\DM-Network.ps1 }
+    If ($Name -eq "OneDrive") { . $Folder\DM-OneDrive.ps1 }
+    If ($Name -eq "PowerShell") { . $Folder\DM-PowerShell.ps1 }
+    If ($Name -eq "PowerShellProfile") { . $Folder\DM-PowerShellProfile.ps1 }
+    If ($Name -eq "SharePoint") { . $Folder\DM-SharePoint.ps1 }
+    If ($Name -eq "Veeam") { . $Folder\DM-Veeam.ps1 }
+    If ($Name -eq "Windows") { . $Folder\DM-Windows.ps1 }
+    If ($Name -eq "WindowsUpdates") { . $Folder\DM-WindowsUpdates.ps1 }
+}
