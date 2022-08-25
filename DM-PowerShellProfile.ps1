@@ -14,10 +14,14 @@ function Install-DMPowerShellFunctions {
 }
 
 function Edit-DMPowerShellProfile {
-    if ($env:COMPUTERNAME -eq "server2022core") { vim C:\Users\dan\Documents\WindowsPowerShell\Microsoft.Powershell_profile.ps1 }
+    vim $PROFILE
+}
+
+function Reload-DMPowerShellProfile {
+    . $PROFILE
 }
 
 function Get-DMCommand {
     Write-Host "Command Reference:"
-    Get-Command *-DM*
+    Get-Command *-DM* | Format-Table Name
 }
