@@ -22,6 +22,5 @@ function Reload-DMPowerShellProfile {
 }
 
 function Get-DMCommand {
-    Write-Host "Command Reference:"
-    Get-Command *-DM* | Format-Table @{L='DM Commands Loaded:';E={$_.Name}}
+    Get-Command *-DM* | Format-Table @{L='DM Commands';E={$_.Name}}
 }
