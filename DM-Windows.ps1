@@ -121,6 +121,13 @@ function Set-DM-HostnameBasedOnSerial ($Prefix) {
 
 ## ----------------------------------------------------------------------------
 
-function Get-DM-DeviceSerialNumber {
+function Get-DMDeviceSerialNumber {
     return (Get-WmiObject Cim_Chassis).SerialNumber)
+}
+
+## ----------------------------------------------------------------------------
+
+Function Get-DMWindowsVersion {
+    Get-ComputerInfo | select WindowsProductName, WindowsVersion
+    [System.Environment]::OSVersion.Version
 }
