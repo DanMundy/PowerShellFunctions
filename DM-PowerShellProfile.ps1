@@ -43,4 +43,5 @@ function Import-DMFunctions ($Name) {
     If ($Name -eq "Veeam") { . $Folder\DM-Veeam.ps1 }
     If ($Name -eq "Windows") { . $Folder\DM-Windows.ps1 }
     If ($Name -eq "WindowsUpdates") { . $Folder\DM-WindowsUpdates.ps1 }
+    Get-DMCommand
 }
