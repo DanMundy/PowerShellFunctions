@@ -3,18 +3,6 @@
 
 ## ----------------------------------------------------------------------------
 
-# Function: Install-DMPowerShellFunctions
-# Purpose:  Download and unzip my PowerShell functions
-# Usage:    Install-DMPowerShellFunctionsInstall-DMPowerShellFunctions
-
-function Install-DMPowerShellFunctions {
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-    wget https://dm.wtf/psf -outFile dm.zip
-    Expand-Archive .\dm.zip . -Force
-}
-
-## ----------------------------------------------------------------------------
-
 # Function: Install-DMModule
 # Purpose:  Update (or Install) PowerShell Module
 # Usage:    Install-DMModule -Name ModuleName (install for all users)
