@@ -12,10 +12,12 @@ function Install-DMPowerShellFunctions {
     wget https://dm.wtf/psf -outFile dm.zip
     Expand-Archive .\dm.zip . -Force
 }
-function Update-DMPowerShellFunctions {
-    Install-DMPowerShellFunctions
+
+function Edit-DMPowerShellProfile {
+    if ($env:COMPUTERNAME -eq "server2022core") { vim C:\Users\dan\Documents\WindowsPowerShell\Microsoft.Powershell_profile.ps1 }
 }
 
-function Edit-DMPowerShelProfile {
-    if ($env:COMPUTERNAME -eq "server2022core") { vim C:\Users\dan\Documents\WindowsPowerShell\Microsoft.Powershell_profile.ps1 }
+function Get-DMCommand {
+    Write-Host "Command Reference:"
+    Get-Command *-DM*
 }
