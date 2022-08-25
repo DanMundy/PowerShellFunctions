@@ -26,6 +26,7 @@ function Get-DMCommand {
     Get-Command *-DM* | Format-Table Name -HideTableHeaders
     Write-Host "Available for loading:"
     Get-Item "C:\DM\PowerShellFunctions-main\DM*.ps1" | Format-Table Name -HideTableHeaders
+    Write-Host "Import with (eg): Import-DMFunctions -Name Active-Directory"
 }
 
 function Import-DMFunctions ($Name) {
