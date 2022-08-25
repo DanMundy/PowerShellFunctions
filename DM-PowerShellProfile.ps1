@@ -8,13 +8,12 @@
 # Usage:    Install-DMPowerShellFunctionsInstall-DMPowerShellFunctions
 
 function Install-DMPowerShellFunctions {
-    [CmdletBinding()]
-    Param(
-        [Alias("Update-DMPowerShellFunctions")])
-
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     wget https://dm.wtf/psf -outFile dm.zip
     Expand-Archive .\dm.zip . -Force
+}
+function Update-DMPowerShellFunctions {
+    Install-DMPowerShellFunctions
 }
 
 function Edit-DMPowerShelProfile {
