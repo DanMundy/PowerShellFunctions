@@ -3,11 +3,11 @@
 
 ## ----------------------------------------------------------------------------
 
-# Function: Install-DMPowerShellFunctions
+# Function: Install-DMFunctionsFromGithub
 # Purpose:  Download and unzip my PowerShell functions
-# Usage:    Install-DMPowerShellFunctionsInstall-DMPowerShellFunctions
+# Usage:    Install-DMFunctionsFromGithubInstall-DMFunctionsFromGithub
 
-function Install-DMPowerShellFunctions {
+function Install-DMFunctionsFromGithub {
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     wget https://dm.wtf/psf -outFile dm.zip
     Expand-Archive .\dm.zip . -Force
@@ -24,14 +24,14 @@ function Reload-DMPowerShellProfile {
 function Get-DMCommand {
     Write-Host "DM Functions available for loading:"
     Get-Item "C:\DM\PowerShellFunctions-main\DM*.ps1" | Format-Table Name -HideTableHeaders
-    Write-Host "Load them with (eg): Import-DMFunctions -Name Active-Directory"
+    Write-Host "Load them with (eg): Import-DMFunction -Name Active-Directory"
     Write-Host ""
     Write-Host "DM Functions that have been loaded:"
     Write-Host "----------"
     Get-Command *-DM* | Format-Table Name -HideTableHeaders
 }
 
-function Import-DMFunctions ($Name) {
+function Import-DMFunction ($Name) {
     $Folder = "C:\DM\PowerShellFunctions-main"
     If ($Name -eq "Active-Directory") { . $Folder\DM-Active-Directory.ps1 }
     If ($Name -eq "Filesystem") { . $Folder\DM-Filesystem.ps1 }
