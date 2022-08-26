@@ -30,7 +30,7 @@ function Connect-DMSPSite {
     )
     if (!$(get-pnpcontext)) {
         Write-Verbose "Was not already connected - Connecting to $url"
-        Connect-PnPOnline -Url $url -Interactive
+        Connect-PnPOnline -Url $url -PnPManagementShell
      } else {
         if ($(get-pnpcontext).url -ne $url) {
             $ConnectionWas = $(get-pnpcontext).url
