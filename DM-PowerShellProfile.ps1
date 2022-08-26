@@ -32,8 +32,7 @@ function Show-DMFunctions {
 }
 
 function Import-DMFunction ($Name) {
-    $Folder = "C:\DM\PowerShellFunctions-main"
-    . $Folder\$Name
+    . "C:\DM\PowerShellFunctions-main\$Name"
     Show-DMFunctions
 }
 
