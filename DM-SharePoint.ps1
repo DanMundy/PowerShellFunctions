@@ -1,5 +1,19 @@
 ### DanMundyPSFunctions: SharePoint
 ### Version: 20220623T1133
+#
+# Functions in this file:
+# ----------
+# Connect-DMSPSite
+# Get-DMAzureADGroupMember
+# Add-DMAzureADGroupMember
+# Remove-DMAzureADGroupMember
+# Reset-DMAzureADGroupMember
+# New-DMSPSite
+# Set-DMSPSitePermission
+# New-DMSPDocumentLibrary
+# New-DMSPGroupsForSite
+# New-DMSPGroupsForDL
+# Set-DMSPDLPermissions
 
 ## ----------------------------------------------------------------------------
 
@@ -377,3 +391,13 @@ Function Set-DMSPDLPermissions ($SiteURL, $SiteName, $Library, $UserID, $ReadGro
 }
 
 ## ----------------------------------------------------------------------------
+
+
+function Get-DMSPDLFileCount ($SiteURL) {
+    $ListName = "Documents"
+
+    Connect-PnPOnline $SiteURL -Interactive
+    $List = Get-PnPList -Identity $ListName
+
+    Get-PnPList -Identity $ListName | Select-Object  ParentWebUrl,Title,ItemCount 
+}

@@ -1,5 +1,13 @@
 ### DanMundyPSFunctions: OneDrive
 ### Version: 20220823T1213
+#
+# Functions in this file:
+# ----------
+# Get-DMOneDriveSites
+# Get-DMOneDriveSitesFileCount
+# New-DMOneDrivePreprovision
+# Get-DMSmbSharePaths
+# Grant-DMAdminAccessToAllOneDriveSites
 
 ## ----------------------------------------------------------------------------
 
