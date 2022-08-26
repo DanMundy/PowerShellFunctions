@@ -21,7 +21,7 @@ function Reload-DMPowerShellProfile {
     . $PROFILE
 }
 
-function Get-DMCommand {
+function Show-DMFunctions {
     Write-Host "DM Functions available for loading:"
     Get-Item "C:\DM\PowerShellFunctions-main\DM*.ps1" | Format-Table Name -HideTableHeaders
     Write-Host "Load them with (eg): Import-DMFunction -Name Active-Directory"
@@ -45,7 +45,7 @@ function Import-DMFunction ($Name) {
     If ($Name -eq "Veeam") { . $Folder\DM-Veeam.ps1 }
     If ($Name -eq "Windows") { . $Folder\DM-Windows.ps1 }
     If ($Name -eq "WindowsUpdates") { . $Folder\DM-WindowsUpdates.ps1 }
-    Get-DMCommand
+    Show-DMFunctions
 }
 
 # ---------- PROMPT ----------
@@ -63,4 +63,4 @@ $Host.UI.RawUI.WindowTitle = "PowerShell"
 # ---------- GO TO MY DIR ----------
 
 cd C:\DM
-Get-DMCommand
+Show-DMFunctions
