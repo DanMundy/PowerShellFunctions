@@ -22,6 +22,13 @@
 # Usage: (eg)
 # Connect-DMSPSite -Url https://companyname.sharepoint.com
 # Connect-DMSPSite -Url https://companyname.sharepoint.com/sites/Sitename
+#
+# Note for Server Core:
+# For MFA I was using -Interactive, but it requires a GUI to bring up the login dialeg
+# To make it work with Server Core as tell, I'm now using -PnPManagementShell instead
+# Only thing is that (for Server Core) you'll need to add this feature for it to work:
+#     Add-WindowsCapability -Online -Name ServerCore.AppCompatibility~~~~0.0.1.0
+#     Restart-Computer
 
 function Connect-DMSPSite {
     [CmdletBinding()]
@@ -392,12 +399,25 @@ Function Set-DMSPDLPermissions ($SiteURL, $SiteName, $Library, $UserID, $ReadGro
 
 ## ----------------------------------------------------------------------------
 
-
-function Get-DMSPDLFileCount ($SiteURL) {
-    $ListName = "Documents"
-
-    Connect-PnPOnline $SiteURL -Interactive
+function Get-DMSPDLFileCount ($ListName) {
+    # Use "Documents" if it's a OneDrive
     $List = Get-PnPList -Identity $ListName
-
     Get-PnPList -Identity $ListName | Select-Object  ParentWebUrl,Title,ItemCount 
+}
+
+## ----------------------------------------------------------------------------
+
+# Usage: Get-DMSPListLastModifiedDate -ListName "Documents" -SiteURL "https://crescent.sharepoint.com/sites/marketing"
+# Make sure you've connected to the site first
+# Todo - make it more function-y
+function Get-DMSPListLastModifiedDate ($SiteURL, $ListName) {     
+    (Get-PnPList -Identity $ListName).LastItemUserModifiedDate
+}
+
+function Get-DM-SPSiteLastModifiedDateForAllLists ($SiteURL) {
+    $Lists = Get-PnPList
+    ForEach($List in $Lists) {
+        Write-Host $($List.Title)
+        Get-DMSPListLastModifiedDate -SiteURL "$SiteURL" -ListName "$($List.Title)"
+    }
 }
