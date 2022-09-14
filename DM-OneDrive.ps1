@@ -21,7 +21,7 @@
 # Todo: Parameter checking, to make sure it's just a single word, no "https://" included (as I'm always mistyping it)
 
 function Get-DMOneDriveSites ($tenant, $outFile) { 
-    if ($(get-pnpcontext).url -ne "https://$tenant.sharepoint.com") { Connect-DMSPSite -Url "https://$tenant.sharepoint.com" }
+    if ($(get-pnpcontext).url -ne "https://$tenant.sharepoint.com") { Connect-PnPOnline -Url "https://$tenant.sharepoint.com" -Interactive }
     #if($azureConnection.Account -eq $null){ $global:azureConnection = Connect-AzureAD } # Connect to AAD
      
     #Get OneDrive Site Details and export to CSV
