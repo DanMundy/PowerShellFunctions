@@ -25,6 +25,7 @@ function Show-DMFunctions {
     Write-Host "DM Functions available for loading:"
     Get-Item "C:\DM\PowerShellFunctions-main\DM*.ps1" | Format-Table Name -HideTableHeaders
     Write-Host "Load them with (eg): Import-DMFunction -Name Active-Directory"
+    Write-Host "(this doesn't work yet, just source it)"
     Write-Host ""
     Write-Host "DM Functions that have been loaded:"
     Write-Host "----------"
