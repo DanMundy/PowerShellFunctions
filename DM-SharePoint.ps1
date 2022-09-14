@@ -414,7 +414,7 @@ function Get-DMSPListLastModifiedDate ($SiteURL, $ListName) {
     (Get-PnPList -Identity $ListName).LastItemUserModifiedDate
 }
 
-function Get-DM-SPSiteLastModifiedDateForAllLists ($SiteURL) {
+function Get-DMSPSiteLastModifiedDateForAllLists ($SiteURL) {
     $Lists = Get-PnPList
     ForEach($List in $Lists) {
         Write-Host $($List.Title)

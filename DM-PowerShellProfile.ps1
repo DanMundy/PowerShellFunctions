@@ -54,5 +54,6 @@ $Host.UI.RawUI.WindowTitle = "PowerShell"
 cd C:\DM
 Show-DMFunctions
 
+# Tab completion for command history:
 Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
