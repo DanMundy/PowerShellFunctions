@@ -47,6 +47,11 @@ function Start-DMSpeedTest {
     return $test
 }
 
+function Get-DMWiredNetworkAdapters {
+    $NetworkAdapters = Get-WmiObject -Class Win32_NetworkAdapterConfiguration -Filter "IPEnabled='TRUE'" | Where-Object { ($_.Description -notlike "*VMware*") -and ($_.Description -notlike "*Wireless*")}
+    $NetworkAdapters | ft IPAddress,Description
+}
+
 ## ----------------------------------------------------------------------------
 
 function Download-DMPSFunction ($name) {

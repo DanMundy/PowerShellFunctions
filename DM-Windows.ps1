@@ -123,6 +123,8 @@ function Set-DMHostnameBasedOnSerial ($Prefix) {
 
 function Get-DMDeviceSerialNumber {
     return (Get-WmiObject Cim_Chassis).SerialNumber)
+    # Note you can also use: (Get-WmiObject Cim_Chassis).SerialNumber
+    # (but it takes a little longer to process)
 }
 
 ## ----------------------------------------------------------------------------
