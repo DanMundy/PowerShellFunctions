@@ -55,24 +55,18 @@ function Get-DMOneDriveSitesFileCount ($SiteURL) {
 # Purpose:  Create OneDrive for users who don't have one, so that migration won't fail
 # Usage:    New-DMOneDrivePreprovision
 
-function New-DMOneDrivePreprovision {
-    #Set SPO service url
-    $SPOServiceUrl = "https://mundy-admin.sharepoint.com"
+function New-DMOneDrivePreprovision ($AdminCenterURL, $UserUPN) {
      
     #Set user emails to provision SPO Personal Site (OneDrive)
-    $UserEmails = Get-Content -path "D:\Temp\User-Emails.txt"
+    $UserEmails = Get-Content -path $UserEmailsFile
      
-    #Connect to SharePoint Online Admin
-    Connect-SPOService -Url $SPOServiceUrl
+    #Connect to PnP Online
+    Connect-PnPOnline -Url $AdminCenterURL -Interactive
      
-    #Confirm connected to correct SPO
-    Get-SPOSite
-     
-    #Request SPO Personal Site (OneDrive) for each user
-    Request-SPOPersonalSite -UserEmails $UserEmails
-     
-    #Get list of all SPO personal sites (OneDrive) URLs.
-    Get-SPOSite -IncludePersonalSite $true -Limit all -Filter "Url -like '-my.sharepoint.com/personal/'" | Sort Url | ft Url
+    #Create OneDrive for User
+    New-PnPPersonalSite -Email $UserUPN
+    #Pre-Provision OneDrive for Business Site for Multiple users
+    #New-PnPPersonalSite -Email "latam@crescent.com", "saopaulo@crescent.com"
 }
 
 ## ----------------------------------------------------------------------------
