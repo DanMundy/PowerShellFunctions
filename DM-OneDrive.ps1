@@ -57,9 +57,6 @@ function Get-DMOneDriveSitesFileCount ($SiteURL) {
 
 function New-DMOneDrivePreprovision ($AdminCenterURL, $UserUPN) {
      
-    #Set user emails to provision SPO Personal Site (OneDrive)
-    $UserEmails = Get-Content -path $UserEmailsFile
-     
     #Connect to PnP Online
     Connect-PnPOnline -Url $AdminCenterURL -Interactive
      
