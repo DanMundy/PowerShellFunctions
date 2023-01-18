@@ -104,3 +104,16 @@ Function Get-DMFilesModifiedWithin ($Folder,$Days) {
 }
 
 ## ----------------------------------------------------------------------------
+
+# Function: touch
+# Purpose:  Windows version of the Linux "touch" utility
+#           (note touch may actually function differently, not 100% sure,
+#           so take this with a grain of salt and verify that it does what you need)
+# Usage:    touch filename.txt (or full path, or touch -file "C:\Path To\filename.txt")
+# Note:     I'd usually call it DM-Something but since touch doesn't exist in Windows or PowerShell,
+#           thought it made more sense in this case
+function touch ($file){
+    (Get-Item "$file").CreationTime=$(Get-Date -format o)
+    (Get-Item "$file").LastWriteTime=$(Get-Date -format o)
+    (Get-Item "$file").LastAccessTime=$(Get-Date -format o)
+}
