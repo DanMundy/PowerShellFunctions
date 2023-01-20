@@ -1,3 +1,4 @@
+$scriptblock = {
 ### DanMundyPSFunctions: Network
 ### Version: 20220816T1226
 
@@ -101,3 +102,4 @@ Address       Name                          Status RoundtripTime
 #>
 
 ## ----------------------------------------------------------------------------
+}
