@@ -1,6 +1,21 @@
 ### DanMundyPSFunctions: Windows
 ### Version: 20220721T2304
 
+## Glue Functions
+
+function Check-DMIsElevated
+
+ {
+    $id = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+    $p = New-Object System.Security.Principal.WindowsPrincipal($id)
+    if ($p.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator))
+   { Write-Output $true }      
+    else
+   { Write-Output $false }   
+ }
+
+ # Use like this: if (-not(Check-IsElevated)) { throw "Please run this script as an administrator" }
+
 ## ----------------------------------------------------------------------------
 
 # Function:     Get-DMLastBootTime
@@ -134,3 +149,12 @@ Function Get-DMWindowsVersion {
     [System.Environment]::OSVersion.Version
 }
 
+
+##
+# Purpose: List User Profiles and the Last Time They Were Used
+# Requirements: Must run as admin
+
+function Get-DMUserProfileLastUseTime {
+    if (-not(Check-DMIsElevated)) { throw "Please run this script as an administrator" }
+    Get-WMIObject -class Win32_UserProfile | sort-object -Property LastUseTime |  ft LocalPath, LastUseTime
+}
