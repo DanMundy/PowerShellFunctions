@@ -45,7 +45,7 @@ function Get-DMInstalledPrograms {
 # Function: Get-DMInstallFeatureUpdate
 # Purpose:  
 # Usage:    Get-DMLastBootTime
-# Sources:  https://dm.wtf/IXTU
+# Sources:  https://dan.srl/IXTU
 
 function Install-DMWindowsFeatureUpdate {
     $winVer = [System.Environment]::OSVersion.Version.Major

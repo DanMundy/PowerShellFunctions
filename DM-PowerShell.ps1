@@ -18,7 +18,7 @@ function Install-DMModule ($Name,$CurrentUser) {
     }
 }
 
-# DM TODO: Below looks interesting: (source: https://dm.wtf/BMZH)
+# DM TODO: Below looks interesting: (source: https://dan.srl/BMZH)
 # After installing the PSWindowsUpdate module on your computer, you can remotely install it on other computers or servers using the Update-WUModule cmdlet. For example, to copy the PSWindowsUpdate module from your computer to two remote hosts, run the commands (you need access to the remote servers via the WinRM protocol):
 #
 # $Targets = "lon-fs02", "lon-db01"

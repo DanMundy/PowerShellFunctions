@@ -9,7 +9,7 @@
 
 function Install-DMFunctionsFromGithub {
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-    wget https://dm.wtf/psf -outFile dm.zip
+    wget https://dan.srl/psf -outFile dm.zip
     Expand-Archive .\dm.zip . -Force
 }
 

@@ -6,7 +6,7 @@
 # Function: Get-DMInstallFeatureUpdate
 # Purpose:  
 # Usage:    Get-DMLastBootTime
-# Sources:  https://dm.wtf/IXTU
+# Sources:  https://dan.srl/IXTU
 
 function Install-DMWindowsFeatureUpdate {
     $winVer = [System.Environment]::OSVersion.Version.Major
@@ -38,7 +38,7 @@ function Install-DMWindowsFeatureUpdate {
 # Function: Install-DMWindowsUpdates
 # Purpose:  Silently install all available updates, no reboot
 # Usage:    Install-DMWindowsUpdates
-# More info on PSWindowsUpdate: https://dm.wtf/BMZH
+# More info on PSWindowsUpdate: https://dan.srl/BMZH
 
 function Install-DMWindowsUpdates {
     if(-not (Get-Module PSWindowsUpdate -ListAvailable)){

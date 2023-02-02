@@ -2,12 +2,12 @@
 
 ## Download All in Zip File: Manual
 
-[Download All in Zip File](https://dm.wtf/psf)
+[Download All in Zip File](https://dan.srl/psf)
 
 ## Download All in Zip File: PowerShell
 
 ```
-wget https://dm.wtf/psf -outFile dm.zip
+wget https://dan.srl/psf -outFile dm.zip
 Expand-Archive .\dm.zip . -Force
 ```
 
@@ -24,7 +24,7 @@ And if you get the message about TLS, then run this one:
 ```
 function Get-DMPowerShellFunctions {
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-    wget https://dm.wtf/psf -outFile dm.zip
+    wget https://dan.srl/psf -outFile dm.zip
     Expand-Archive .\dm.zip . -Force
 }
 Get-DMPowerShellFunctions

@@ -34,7 +34,7 @@ function Get-DMOneDriveSites ($tenant, $outFile) {
 }
 
 # Usage:   Get-DMOneDriveSitesFileCount -SiteURL "https://purewineco-my.sharepoint.com/personal/stanley_tan_purewine_co"
-# Sources: https://dm.wtf/RFGK https://dm.wtf/XIHN
+# Sources: https://dan.srl/RFGK https://dan.srl/XIHN
 # Todo:    Combine it with the above, so it scans *all* OneDrives, and shows both usage in MB, and number of files
 
 function Get-DMOneDriveSitesFileCount ($SiteURL) {
