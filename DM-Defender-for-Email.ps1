@@ -66,8 +66,8 @@ function New-DMStandardAntiPhishPolicy{
     $StandardAntiPhishPolicyAttributes = $Null
     $StandardAntiPhishPolicyAttributes = @{
         AuthenticationFailAction = $StandardAntiPhishPolicy.AuthenticationFailAction
-        DmarcQuarantineAction = $StandardAntiPhishPolicy.DmarcQuarantineAction
-        DmarcRejectAction = $StandardAntiPhishPolicy.DmarcRejectAction
+        #DmarcQuarantineAction = $StandardAntiPhishPolicy.DmarcQuarantineAction
+        #DmarcRejectAction = $StandardAntiPhishPolicy.DmarcRejectAction
         EnableFirstContactSafetyTips = $StandardAntiPhishPolicy.EnableFirstContactSafetyTips
         EnableMailboxIntelligence = $StandardAntiPhishPolicy.EnableMailboxIntelligence
         EnableMailboxIntelligenceProtection = $StandardAntiPhishPolicy.EnableMailboxIntelligenceProtection
@@ -80,8 +80,7 @@ function New-DMStandardAntiPhishPolicy{
         EnableUnauthenticatedSender = $StandardAntiPhishPolicy.EnableUnauthenticatedSender
         EnableUnusualCharactersSafetyTips = $StandardAntiPhishPolicy.EnableUnusualCharactersSafetyTips
         EnableViaTag = $StandardAntiPhishPolicy.EnableViaTag
-        HonorDmarcPolicy = $StandardAntiPhishPolicy.HonorDmarcPolicy
-        ImpersonationProtectionState = $StandardAntiPhishPolicy.ImpersonationProtectionState
+        #HonorDmarcPolicy = $StandardAntiPhishPolicy.HonorDmarcPolicy
         MailboxIntelligenceProtectionAction = $StandardAntiPhishPolicy.MailboxIntelligenceProtectionAction
         MailboxIntelligenceQuarantineTag = "DefaultFullAccessWithNotificationPolicy"
         #MailboxIntelligenceQuarantineTag = $StandardAntiPhishPolicy.MailboxIntelligenceQuarantineTag
@@ -103,7 +102,6 @@ function New-DMStandardAntiPhishPolicy{
 function Set-DMStandardAntiPhishPolicy {
     $StandardAntiPhishPolicyAttributes = $Null
     $StandardAntiPhishPolicyAttributes = @{
-        ImpersonationProtectionState = $StandardAntiPhishPolicy.ImpersonationProtectionState
         EnableTargetedUserProtection = $StandardAntiPhishPolicy.EnableTargetedUserProtection
         EnableMailboxIntelligenceProtection = $StandardAntiPhishPolicy.EnableMailboxIntelligenceProtection
         EnableTargetedDomainsProtection = $StandardAntiPhishPolicy.EnableTargetedDomainsProtection
@@ -120,9 +118,9 @@ function Set-DMStandardAntiPhishPolicy {
         EnableSpoofIntelligence = $StandardAntiPhishPolicy.EnableSpoofIntelligence
         EnableViaTag = $StandardAntiPhishPolicy.EnableViaTag
         EnableUnauthenticatedSender = $StandardAntiPhishPolicy.EnableUnauthenticatedSender
-        HonorDmarcPolicy = $StandardAntiPhishPolicy.HonorDmarcPolicy
-        DmarcRejectAction = $StandardAntiPhishPolicy.DmarcRejectAction
-        DmarcQuarantineAction = $StandardAntiPhishPolicy.DmarcQuarantineAction
+        #HonorDmarcPolicy = $StandardAntiPhishPolicy.HonorDmarcPolicy
+        #DmarcRejectAction = $StandardAntiPhishPolicy.DmarcRejectAction
+        #DmarcQuarantineAction = $StandardAntiPhishPolicy.DmarcQuarantineAction
         PhishThresholdLevel = $StandardAntiPhishPolicy.PhishThresholdLevel
         TargetedUserQuarantineTag = "DefaultFullAccessWithNotificationPolicy"
         MailboxIntelligenceQuarantineTag = "DefaultFullAccessWithNotificationPolicy"
@@ -287,7 +285,6 @@ function Show-DMAntiPhishPolicy {
     $AntiPhishPolicy = Get-AntiPhishPolicy  | where -property RecommendedPolicyType -eq "Custom" | where -property IsDefault -eq $false
     Write-Host $AntiPhishPolicy.Name
     Write-Host "----------"
-    Write-Host ImpersonationProtectionState = $AntiPhishPolicy.ImpersonationProtectionState
     Write-Host EnableTargetedUserProtection = $AntiPhishPolicy.EnableTargetedUserProtection
     Write-Host EnableMailboxIntelligenceProtection = $AntiPhishPolicy.EnableMailboxIntelligenceProtection
     Write-Host EnableTargetedDomainsProtection = $AntiPhishPolicy.EnableTargetedDomainsProtection
@@ -308,9 +305,9 @@ function Show-DMAntiPhishPolicy {
     Write-Host EnableSpoofIntelligence = $AntiPhishPolicy.EnableSpoofIntelligence
     Write-Host EnableViaTag = $AntiPhishPolicy.EnableViaTag
     Write-Host EnableUnauthenticatedSender = $AntiPhishPolicy.EnableUnauthenticatedSender
-    Write-Host HonorDmarcPolicy = $AntiPhishPolicy.HonorDmarcPolicy
-    Write-Host DmarcRejectAction = $AntiPhishPolicy.DmarcRejectAction
-    Write-Host DmarcQuarantineAction = $AntiPhishPolicy.DmarcQuarantineAction
+    #Write-Host HonorDmarcPolicy = $AntiPhishPolicy.HonorDmarcPolicy
+    #Write-Host DmarcRejectAction = $AntiPhishPolicy.DmarcRejectAction
+    #Write-Host DmarcQuarantineAction = $AntiPhishPolicy.DmarcQuarantineAction
     Write-Host PhishThresholdLevel = $AntiPhishPolicy.PhishThresholdLevel
 }
 
@@ -443,4 +440,28 @@ function Remove-DMAllCustomDefenderPolicies {
 function Remove-DMMalwareFilterPolicy {
     Get-MalwareFilterPolicy  | where -property RecommendedPolicyType -eq "Custom" | where -property IsDefault -eq $false | Remove-MalwareFilterPolicy
     Get-MalwareFilterRule | Remove-MalwareFilterRule
+}
+
+function Remove-DMAntiPhishPolicy {
+    Get-AntiPhishPolicy  | where -property RecommendedPolicyType -eq "Custom" | where -property IsDefault -eq $false | Remove-AntiPhishPolicy
+    Get-AntiPhishRule | Remove-AntiPhishRule
+}
+
+###############
+
+function Get-DMMessageTraceDetail {
+    [CmdletBinding()]
+    param (
+        $SenderAddress,
+        $RecipientAddress
+    )
+    $messages = (Get-MessageTrace -RecipientAddress $RecipientAddress -SenderAddress $SenderAddress)
+    #Write-Host "Message list:"
+    #$messages
+    ForEach ($message in $messages) {
+        #Write-Host "Message details:"
+        #$_
+        #Write-Host "Message ID:"
+        Get-MessageTraceDetail -MessageTraceId $message.MessageTraceId -RecipientAddress $message.RecipientAddress | Format-List
+    }
 }
