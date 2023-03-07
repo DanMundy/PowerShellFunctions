@@ -42,6 +42,16 @@ function Get-DMInstalledPrograms {
 
 ## ----------------------------------------------------------------------------
 
+# Function:     Get-DMInstalledFeatures
+# Purpose:      Show roles & features installed
+# Usage:        Get-DMInstalledFeatures
+
+function Get-DMInstalledFeatures {
+    Get-WindowsFeature | Where-Object {$_. installstate -eq "installed"} | Format-Table -AutoSize
+}
+
+## ----------------------------------------------------------------------------
+
 # Function: Get-DMInstallFeatureUpdate
 # Purpose:  
 # Usage:    Get-DMLastBootTime

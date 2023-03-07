@@ -63,3 +63,8 @@ function Download-DMPSFunction ($name) {
 
 ## ----------------------------------------------------------------------------
 
+
+
+function Get-DMPublicIPAddress {
+    (Invoke-WebRequest -UseBasicParsing ifconfig.me/ip).Content.Trim()
+}
