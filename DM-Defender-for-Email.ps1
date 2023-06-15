@@ -4,7 +4,10 @@
 # 
 # Ref:
 # - [Microsoft recommendations for EOP and Defender for Office 365 security settings - Office 365 | Microsoft Learn](https://learn.microsoft.com/en-us/microsoft-365/security/office-365-security/recommended-settings-for-eop-and-office365?view=o365-worldwide)
-
+#
+# *** YOU MUST MANUALLY TURN ON THE "STANDARD PROTECTION" PRESET SECURITY POLICY FIRST ***
+# It has to be done in the Defender Portal, there is no PowerShell way of doing this (not that I could find anyway)
+#
 # "Remember, if you never turned on the Standard preset security policy or the Strict preset security policy
 # in the Microsoft 365 Defender portal, 
 # the associated security policies for the preset security policy don't exist." 
@@ -62,6 +65,7 @@ function Connect-DMExchangeOnline {
 # Create an AntiPhish Policy by copying the Standard preset security policy
 # --------------------
 function New-DMStandardAntiPhishPolicy{
+    $domains = (Get-AcceptedDomain).Name
     $StandardAntiPhishPolicy = Get-AntiPhishPolicy | where -Property RecommendedPolicyType -Eq Standard
     $StandardAntiPhishPolicyAttributes = $Null
     $StandardAntiPhishPolicyAttributes = @{
@@ -134,6 +138,7 @@ function Set-DMStandardAntiPhishPolicy {
 # --------------------
 
 function New-DMStandardMalwareFilterPolicy {
+    $domains = (Get-AcceptedDomain).Name
     $StandardMalwareFilterPolicy = Get-MalwareFilterPolicy | where -Property RecommendedPolicyType -Eq Standard
     $StandardMalwareFilterPolicyAttributes = $Null
     $StandardMalwareFilterPolicyAttributes = @{
@@ -153,6 +158,7 @@ function New-DMStandardMalwareFilterPolicy {
 # Create a Safe Attachment Policy by copying the Standard preset security policy
 # --------------------
 function New-DMStandardSafeAttachmentPolicy {
+    $domains = (Get-AcceptedDomain).Name
     $StandardSafeAttachmentPolicy = Get-SafeAttachmentPolicy | where -Property RecommendedPolicyType -Eq Standard
     $StandardSafeAttachmentPolicyAttributes = $Null
     $StandardSafeAttachmentPolicyAttributes = @{
@@ -170,6 +176,7 @@ function New-DMStandardSafeAttachmentPolicy {
 # Create a Safe Links Policy by copying the Standard preset security policy
 # --------------------
 function New-DMStandardSafeLinksPolicy {
+    $domains = (Get-AcceptedDomain).Name
     $StandardSafeLinksPolicy = Get-SafeLinksPolicy | where -Property RecommendedPolicyType -Eq Standard | Select-Object *
     $StandardSafeLinksPolicyAttributes = $Null
     $StandardSafeLinksPolicyAttributes = @{
@@ -191,6 +198,7 @@ function New-DMStandardSafeLinksPolicy {
 # Create a Spam Filter (Inbound) Policy by copying the Standard preset security policy
 # --------------------
 function New-DMStandardHostedContentFilterPolicy {
+    $domains = (Get-AcceptedDomain).Name
     $StandardHostedContentFilterPolicy = Get-HostedContentFilterPolicy | where -Property RecommendedPolicyType -Eq Standard | Select-Object *
     $StandardHostedContentFilterPolicyAttributes = $Null
     $StandardHostedContentFilterPolicyAttributes = @{
@@ -250,6 +258,7 @@ function New-DMStandardHostedContentFilterPolicy {
 # Create a Spam Filter (Outbound) Policy by copying the Standard preset security policy
 # --------------------
 function New-DMStandardHostedOutboundSpamFilterPolicy {
+    $domains = (Get-AcceptedDomain).Name
     $StandardHostedOutboundSpamFilterPolicyAttributes = $Null
     $StandardHostedOutboundSpamFilterPolicyAttributes = @{
         # Ref: [Recommended settings for EOP and Microsoft Defender for Office 365 security](https://dan.srl/FGQU)
