@@ -218,7 +218,7 @@ function New-DMStandardHostedContentFilterPolicy {
         EnableEndUserSpamNotifications = $StandardHostedContentFilterPolicy.EnableEndUserSpamNotifications
         EnableLanguageBlockList = $StandardHostedContentFilterPolicy.EnableLanguageBlockList
         EnableRegionBlockList = $StandardHostedContentFilterPolicy.EnableRegionBlockList
-        EndUserSpamNotificationFrequency = 04:00:00
+        EndUserSpamNotificationFrequency = "04:00:00"
         #EndUserSpamNotificationFrequency = $StandardHostedContentFilterPolicy.EndUserSpamNotificationFrequency
         EndUserSpamNotificationLanguage = $StandardHostedContentFilterPolicy.EndUserSpamNotificationLanguage
         EndUserSpamNotificationLimit = $StandardHostedContentFilterPolicy.EndUserSpamNotificationLimit
