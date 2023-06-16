@@ -54,6 +54,10 @@ function Connect-DMExchangeOnline {
     Connect-ExchangeOnline
 
     $domains = (Get-AcceptedDomain).Name
+
+    Write-Host "Don't forget, if the Standard policies don't exist yet,"
+    Write-Host "you need to *manually* turn on Standard Protection in the Defender Portal"
+    Write-Host "(cannot be done with PowerShell (yet)"
 }
 
 
