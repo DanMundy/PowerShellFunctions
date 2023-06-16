@@ -211,7 +211,7 @@ function New-DMStandardHostedContentFilterPolicy {
         BulkSpamAction = $StandardHostedContentFilterPolicy.BulkSpamAction
         BulkThreshold = $StandardHostedContentFilterPolicy.BulkThreshold
         DownloadLink = $StandardHostedContentFilterPolicy.DownloadLink
-        EnableEndUserSpamNotifications = $StandardHostedContentFilterPolicy.EnableEndUserSpamNotifications
+        #EnableEndUserSpamNotifications = $StandardHostedContentFilterPolicy.EnableEndUserSpamNotifications
         EnableLanguageBlockList = $StandardHostedContentFilterPolicy.EnableLanguageBlockList
         EnableRegionBlockList = $StandardHostedContentFilterPolicy.EnableRegionBlockList
         EndUserSpamNotificationFrequency = $StandardHostedContentFilterPolicy.EndUserSpamNotificationFrequency
