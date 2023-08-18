@@ -1,3 +1,7 @@
+### DanMundyPSFunctions: SharePoint
+### Filename: DM-SharePointMigrationPreChecks.md
+### Version: 20220623T1133
+
 Function Get-DMFolderSizeAndItems {
     [CmdletBinding()]
     param(
@@ -151,12 +155,13 @@ Function Get-DMFolderItem {
 ## ----------------------------------------------------------------------------
 
 
-function Get-DMFileAccessDenied ($Path) {
+function Get-DMFileAccessDenied ($Path, $OutFile) {
     $errors=@()
     get-childitem -recurse $Path -ea silentlycontinue -ErrorVariable +errors | Out-Null
     $errors.Count
-    $errors | select -expand categoryinfo | select reason,targetname | export-csv -NoTypeInformation -Delimiter ";" $($WorkingDir + "\File-Access-Denied.csv")
+    $errors | select -expand categoryinfo | select reason,targetname | export-csv -NoTypeInformation -Delimiter ";" $OutFile
 }
+# Usage: Get-DMFileAccessDenied -Path "D:\test" -OutFile "C:\Users\c1admin\results.csv"
 
 ## ----------------------------------------------------------------------------
 

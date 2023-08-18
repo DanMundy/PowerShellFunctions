@@ -11,22 +11,240 @@
 			"file": "DM-SharePointMigrationPreChecks.ps1",
 			"settings":
 			{
-				"buffer_size": 8268,
+				"buffer_size": 8381,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			},
 			"undo_stack":
 			[
+				[
+					5,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					7,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+				],
+				[
+					9,
+					1,
+					"paste_and_indent",
+					{
+						"event":
+						{
+							"modifier_keys":
+							{
+								"primary": true,
+								"super": true
+							}
+						}
+					},
+					"AQAAAAAAAAAAAAAAIgAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+				],
+				[
+					11,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+				],
+				[
+					13,
+					1,
+					"paste_and_indent",
+					{
+						"event":
+						{
+							"modifier_keys":
+							{
+								"primary": true,
+								"super": true
+							}
+						}
+					},
+					"AQAAAAAAAAAAAAAAXgAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+				],
+				[
+					17,
+					1,
+					"cut",
+					null,
+					"AQAAAF8AAAAAAAAAXwAAAAAAAAAiAAAARE0tU2hhcmVQb2ludE1pZ3JhdGlvblByZUNoZWNrcy5tZA",
+					"AQAAAAAAAAABAAAAXwAAAAAAAACBAAAAAAAAAP///////+9/"
+				],
+				[
+					18,
+					1,
+					"left_delete",
+					null,
+					"AQAAAF4AAAAAAAAAXgAAAAAAAAABAAAACg",
+					"AQAAAAAAAAABAAAAXwAAAAAAAABfAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					22,
+					1,
+					"paste_and_indent",
+					{
+						"event":
+						{
+							"modifier_keys":
+							{
+								"primary": true,
+								"super": true
+							}
+						}
+					},
+					"AgAAADIAAAAAAAAAVAAAAAAAAAAAAAAAVAAAAAAAAABUAAAAAAAAABEAAABETS1TaGFyZVBvaW50LnBzMQ",
+					"AQAAAAAAAAABAAAAMgAAAAAAAABDAAAAAAAAAP///////+9/"
+				]
 			]
 		},
 		{
-			"file": "DM-Filesystem.ps1",
+			"file": "DM-SharePoint.ps1",
 			"settings":
 			{
-				"buffer_size": 4785,
+				"buffer_size": 19531,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			},
 			"undo_stack":
 			[
+				[
+					8,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAACMAAAAAAAAAJAAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAIwAAAAAAAAAjAAAAAAAAAP///////+9/"
+				],
+				[
+					9,
+					1,
+					"paste_and_indent",
+					{
+						"event":
+						{
+							"modifier_keys":
+							{
+								"primary": true,
+								"super": true
+							}
+						}
+					},
+					"AQAAACQAAAAAAAAAOAAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAJAAAAAAAAAAkAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					12,
+					1,
+					"left_delete",
+					null,
+					"AQAAACQAAAAAAAAAJAAAAAAAAAABAAAAIA",
+					"AQAAAAAAAAABAAAAJQAAAAAAAAAlAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					13,
+					1,
+					"left_delete",
+					null,
+					"AQAAACMAAAAAAAAAIwAAAAAAAAABAAAAIA",
+					"AQAAAAAAAAABAAAAJAAAAAAAAAAkAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					14,
+					1,
+					"right_delete",
+					null,
+					"AQAAACMAAAAAAAAAIwAAAAAAAAABAAAAKA",
+					"AQAAAAAAAAABAAAAIwAAAAAAAAAjAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					15,
+					1,
+					"insert",
+					{
+						"characters": "\n###"
+					},
+					"BAAAACMAAAAAAAAAJAAAAAAAAAAAAAAAJAAAAAAAAAAlAAAAAAAAAAAAAAAlAAAAAAAAACYAAAAAAAAAAAAAACYAAAAAAAAAJwAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAIwAAAAAAAAAjAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					16,
+					1,
+					"insert",
+					{
+						"characters": " Filename:"
+					},
+					"CgAAACcAAAAAAAAAKAAAAAAAAAAAAAAAKAAAAAAAAAApAAAAAAAAAAAAAAApAAAAAAAAACoAAAAAAAAAAAAAACoAAAAAAAAAKwAAAAAAAAAAAAAAKwAAAAAAAAAsAAAAAAAAAAAAAAAsAAAAAAAAAC0AAAAAAAAAAAAAAC0AAAAAAAAALgAAAAAAAAAAAAAALgAAAAAAAAAvAAAAAAAAAAAAAAAvAAAAAAAAADAAAAAAAAAAAAAAADAAAAAAAAAAMQAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAJwAAAAAAAAAnAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					17,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAADEAAAAAAAAAMgAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAMQAAAAAAAAAxAAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					19,
+					1,
+					"left_delete",
+					null,
+					"AQAAAEMAAAAAAAAAQwAAAAAAAAABAAAAKQ",
+					"AQAAAAAAAAABAAAARAAAAAAAAABEAAAAAAAAAP///////+9/"
+				]
+			]
+		},
+		{
+			"file": "DM-SharePointMigrationPreChecks.md",
+			"settings":
+			{
+				"buffer_size": 2649,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+				[
+					6,
+					1,
+					"run_macro_file",
+					{
+						"file": "Packages/MarkdownEditing/macros/Add Line and Delete Trailing Hashes.sublime-macro"
+					},
+					"AgAAAAAAAAAAAAAAAAAAAAAAAAARAAAAIyBNaWdyYXRpb24gdXNhZ2UAAAAAAAAAABIAAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAEQAAAAAAAAARAAAAAAAAAP///////+9/"
+				],
+				[
+					7,
+					1,
+					"left_delete",
+					null,
+					"AQAAABEAAAAAAAAAEQAAAAAAAAABAAAACg",
+					"AQAAAAAAAAABAAAAEgAAAAAAAAASAAAAAAAAAAAAAAAAAPC/"
+				]
 			]
 		}
 	],
@@ -82,10 +300,10 @@
 	],
 	"file_history":
 	[
+		"/Users/danielmundy/Dropbox/git/PowerShellFunctions/DM-Filesystem.ps1",
 		"/Users/danielmundy/Dropbox/git/PowerShellFunctions/DM-Windows.ps1",
 		"/Users/danielmundy/Dropbox/git/PowerShellFunctions/DM-WindowsUpdates.ps1",
 		"/Users/danielmundy/Dropbox/git/PowerShellFunctions/Download-DM-PowerShell-Functions.ps1",
-		"/Users/danielmundy/Dropbox/git/PowerShellFunctions/DM-Filesystem.ps1",
 		"/Users/danielmundy/Dropbox/git/PowerShellFunctions/DM-Hyper-V.ps1",
 		"/Users/danielmundy/Dropbox/git/PowerShellFunctions/DM-Internet.ps1",
 		"/Users/danielmundy/Dropbox/git/PowerShellFunctions/DM-Network.ps1",
@@ -263,15 +481,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8268,
+						"buffer_size": 8381,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6011,
-								6011
+								0,
+								8381
 							]
 						],
 						"settings":
@@ -288,7 +506,7 @@
 							"syncScroll": false,
 							"syntax": "Packages/PowerShell/Support/PowershellSyntax.tmLanguage",
 							"tab_size": 4,
-							"tabs_extra_last_activated": 1691391315.26,
+							"tabs_extra_last_activated": 1691462416.73,
 							"tabs_extra_last_activated_sheet_index": 0,
 							"translate_tabs_to_spaces": true
 						},
@@ -302,20 +520,19 @@
 				},
 				{
 					"buffer": 1,
-					"file": "DM-Filesystem.ps1",
-					"selected": true,
+					"file": "DM-SharePoint.ps1",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4785,
+						"buffer_size": 19531,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2356,
-								2356
+								94,
+								0
 							]
 						],
 						"settings":
@@ -332,9 +549,54 @@
 							"syncScroll": false,
 							"syntax": "Packages/PowerShell/Support/PowershellSyntax.tmLanguage",
 							"tab_size": 4,
-							"tabs_extra_last_activated": 1691391921.57,
+							"tabs_extra_last_activated": 1691462387.39,
 							"tabs_extra_last_activated_sheet_index": 1,
 							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "DM-SharePointMigrationPreChecks.md",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2649,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1815,
+								1815
+							]
+						],
+						"settings":
+						{
+							"last_modified_indicator": true,
+							"last_modified_indicator_file_save_clear": false,
+							"last_modified_indicator_multiline": true,
+							"mde.match_heading_hashes": false,
+							"origPos":
+							[
+								0.0,
+								0.0
+							],
+							"rainbow_checked": true,
+							"syncScroll": false,
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax",
+							"tab_size": 4,
+							"tabs_extra_last_activated": 1691464830.32,
+							"tabs_extra_last_activated_sheet_index": 2,
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -353,7 +615,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 38.0
 	},
 	"layout":
 	{
