@@ -161,7 +161,7 @@ function Get-DMFileAccessDenied ($Path, $OutFile) {
     $errors.Count
     $errors | select -expand categoryinfo | select reason,targetname | export-csv -NoTypeInformation -Delimiter ";" $OutFile
 }
-# Usage: Get-DMFileAccessDenied -Path "D:\test" -OutFile "C:\Users\c1admin\results.csv"
+# Usage: Get-DMFileAccessDenied -Path "D:\Data" -OutFile "C:\C1\results.csv"
 
 ## ----------------------------------------------------------------------------
 
