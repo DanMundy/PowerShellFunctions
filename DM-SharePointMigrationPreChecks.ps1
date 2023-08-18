@@ -155,6 +155,7 @@ Function Get-DMFolderItem {
 ## ----------------------------------------------------------------------------
 
 
+# Reports on folders that cannot be accessed
 function Get-DMFileAccessDenied ($Path, $OutFile) {
     $errors=@()
     get-childitem -recurse $Path -ea silentlycontinue -ErrorVariable +errors | Out-Null
